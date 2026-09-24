@@ -1,0 +1,76 @@
+const SYMBOLS: Record<string, string> = {
+  SPACEX: "BINANCE:SPCXBUSDT",
+  SPCXB: "BINANCE:SPCXBUSDT",
+  OPENAI: "BINANCE:OPENAIUSDT.P",
+  ANTHROPIC: "BINANCE:ANTHROPICUSDT.P",
+  ANDURIL: "GATEIO:ANDURILUSDT.P",
+  KALSHI: "GATEIO:KALSHIUSDT.P",
+  POLYMARKET: "GATEIO:POLYMARKETUSDT.P",
+  NEURALINK: "GATEIO:NEURALINKUSDT.P",
+  AAPL: "NASDAQ:AAPL",
+  AAPLX: "NASDAQ:AAPL",
+  AAPLON: "NASDAQ:AAPL",
+  MSFT: "NASDAQ:MSFT",
+  MSFTX: "NASDAQ:MSFT",
+  GOOGL: "NASDAQ:GOOGL",
+  GOOGLX: "NASDAQ:GOOGL",
+  AMZN: "NASDAQ:AMZN",
+  AMZNX: "NASDAQ:AMZN",
+  META: "NASDAQ:META",
+  METAX: "NASDAQ:META",
+  TSLA: "NASDAQ:TSLA",
+  TSLAX: "NASDAQ:TSLA",
+  NVDA: "NASDAQ:NVDA",
+  NVDAX: "NASDAQ:NVDA",
+  PLTR: "NASDAQ:PLTR",
+  PLTRX: "NASDAQ:PLTR",
+  COIN: "NASDAQ:COIN",
+  COINX: "NASDAQ:COIN",
+  MSTR: "NASDAQ:MSTR",
+  MSTRX: "NASDAQ:MSTR",
+  HOOD: "NASDAQ:HOOD",
+  HOODX: "NASDAQ:HOOD",
+  SPY: "AMEX:SPY",
+  SPYX: "AMEX:SPY",
+  QQQ: "NASDAQ:QQQ",
+  QQQX: "NASDAQ:QQQ",
+  AVGO: "NASDAQ:AVGO",
+  AVGOX: "NASDAQ:AVGO",
+  INTC: "NASDAQ:INTC",
+  INTCX: "NASDAQ:INTC",
+  AMD: "NASDAQ:AMD",
+  AMDX: "NASDAQ:AMD",
+  BTC: "BINANCE:BTCUSDT",
+  SOL: "BINANCE:SOLUSDT",
+  USDC: "BINANCE:USDCUSDT",
+};
+
+export const TV_WATCHLIST = [
+  "BINANCE:SPCXBUSDT",
+  "BINANCE:OPENAIUSDT.P",
+  "BINANCE:ANTHROPICUSDT.P",
+  "GATEIO:ANDURILUSDT.P",
+  "GATEIO:KALSHIUSDT.P",
+  "GATEIO:POLYMARKETUSDT.P",
+  "NASDAQ:AAPL",
+  "NASDAQ:MSFT",
+  "NASDAQ:GOOGL",
+  "NASDAQ:NVDA",
+  "NASDAQ:TSLA",
+  "AMEX:SPY",
+  "BINANCE:BTCUSDT",
+  "BINANCE:SOLUSDT",
+];
+
+export function tradingViewSymbol(symbol: string) {
+  const key = symbol.toUpperCase().replace(/^T-/, "");
+  if (SYMBOLS[key]) return SYMBOLS[key];
+  if (key.endsWith("X") && SYMBOLS[key.slice(0, -1)]) {
+    return SYMBOLS[key.slice(0, -1)];
+  }
+  return null;
+}
+
+export function tradingViewHref(tvSymbol: string) {
+  return `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tvSymbol)}`;
+}
