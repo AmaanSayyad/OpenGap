@@ -286,23 +286,23 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
         )}
       >
         {desk !== "launch" ? (
-        <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <section className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-center">
           <div>
-            <PageTitle>
-              Buy tokenized stocks when the tape is cheaper than the mark.
+            <PageTitle className="max-w-2xl text-lg font-medium leading-7 tracking-normal sm:text-xl sm:leading-8">
+              Buy tokenized stocks when the live price on Jupiter is cheaper
+              than the official reference price from the issuer (PreStocks, or
+              Yahoo on listed names).
             </PageTitle>
             <p className="mt-5 max-w-lg text-sm leading-7 text-muted-foreground">
               {cheap
                 ? `Right now ${cheap.symbol} trades ${formatPct(cheap.premium)} to mark — tape ${formatPrice(cheap.execPrice)} vs issuer ${formatPrice(cheap.markPrice)}.`
                 : "Four steps: pick a name, read the gap, watch Jupiter, then buy."}{" "}
-              Tape is the live Jupiter price — what you actually pay. Mark is
-              the issuer reference, not a quote you can lift. Green means tape
-              is cheaper than mark. That gap is the trade. Search for a name in
+              Green means cheaper. That gap is the trade. Search for a name in
               the header.
             </p>
           </div>
           {cheap ? (
-            <Panel data-tour="discount" className="flex items-center justify-between gap-4">
+            <Panel data-tour="discount" className="flex w-full items-center justify-between gap-6 px-6 py-5">
               <div className="flex items-start gap-3">
                 <TokenLogo symbol={cheap.symbol} image={cheap.image} size="lg" className="mt-1" />
                 <div>

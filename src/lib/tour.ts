@@ -132,8 +132,8 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     id: "launch-quote",
-    title: "A token later",
-    body: "Check launch fee only asks what a token would cost. Nothing is created. You launch later, on purpose.",
+    title: "The OpenGap token",
+    body: "$OPENGAP is live on ClawPump. It is the AnsemHack entry ticket and fee share. The agent does not mint another.",
     target: "launch-quote",
     desk: "launch",
   },

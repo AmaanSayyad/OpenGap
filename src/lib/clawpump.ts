@@ -1,3 +1,5 @@
+import { TOKEN_MINT, TOKEN_URL } from "@/lib/company";
+
 const CLAWPUMP = "https://clawpump.tech";
 const V1 = `${CLAWPUMP}/api/v1`;
 
@@ -229,6 +231,7 @@ export async function getClawpumpDesk() {
       wallet: detail?.walletAddress
         ? `https://solscan.io/account/${detail.walletAddress}`
         : null,
+      token: TOKEN_URL,
     },
     hack: {
       stocklana: true,
@@ -236,7 +239,7 @@ export async function getClawpumpDesk() {
         agentDeployed: Boolean(detail),
         agentPublic: Boolean(detail?.isPublic),
         agentRunning: detail?.status === "running",
-        tokenLive: Boolean(detail?.tokenAddress),
+        tokenLive: Boolean(detail?.tokenAddress ?? TOKEN_MINT),
         tokenizeDeadline: "2026-10-01T04:00:00.000Z",
       },
     },

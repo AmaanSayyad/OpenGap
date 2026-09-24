@@ -1,4 +1,5 @@
-import { GITHUB_URL, SITE_URL } from "@/lib/brand";
+import { GITHUB_URL, SITE_URL, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import { TOKEN_URL } from "@/lib/company";
 import type { Desk } from "@/lib/tour";
 
 export const DESK_LINKS: Array<{
@@ -20,6 +21,9 @@ export const FOOTER_LINKS = {
     { label: "Buy all", href: "/?desk=prestocks" },
     { label: "Live", href: SITE_URL },
     { label: "GitHub", href: GITHUB_URL },
+    { label: "X", href: X_URL },
+    { label: "Telegram", href: TELEGRAM_URL },
+    { label: "$OPENGAP", href: TOKEN_URL },
   ],
   venues: [
     { label: "Jupiter", href: "https://jup.ag", logo: "/logos/jupiter.png" },

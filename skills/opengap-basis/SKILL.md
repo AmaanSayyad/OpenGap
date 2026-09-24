@@ -11,8 +11,10 @@ Tape is the live price on Jupiter — what you actually pay if you buy right now
 Mark is the official reference price from the issuer (PreStocks, or Yahoo on listed names). It is not a quote you can lift.
 Green means tape is cheaper than mark. That gap is the trade.
 
-Product: https://opengap.vercel.app
+Product: https://opengap.xyz
 Source: https://github.com/AmaanSayyad/OpenGap
+X: https://x.com/Open_Gap
+Telegram: https://t.me/OpenGapp
 
 ## Signal
 
@@ -48,7 +50,7 @@ If no name is ≤ −3%, or Jupiter disagrees, or the wallet is dry: **hold**. L
 
 ## Never
 
-- Launch, mint, or tokenize anything. No `/launch`, no pump.fun create, no Pons, no Uniswap create
+- Launch, mint, or tokenize anything new. $OPENGAP is already live (Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD). No second `/launch`, no pump.fun create, no Pons, no Uniswap create
 - Transfer off the agent wallet except the Jupiter buy of the named mint
 - Trade perps, sniper, memecoins, or names that are rich to mark
 - Post to social

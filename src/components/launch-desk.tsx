@@ -7,6 +7,16 @@ import { TokenLogo } from "@/components/token-logo";
 import { TourHint } from "@/components/product-tour";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
+import {
+  ANSEMHACK_URL,
+  ROADMAP,
+  STOCK_POOL,
+  TOKEN_MINT,
+  TOKEN_SOLSCAN,
+  TOKEN_SYMBOL,
+  TOKEN_URL,
+  TOKEN_UTILITY,
+} from "@/lib/company";
 import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
 import type { MeteoraPool } from "@/lib/types";
@@ -61,11 +71,11 @@ type DeskPayload = {
   error?: string;
 };
 
-const MAJOR = new Set(["SOL", "USDC", "BTC", "ETH"]);
 const RULES = [
   { label: "Buy only at −3%", hint: "Live must be cheaper than official" },
-  { label: "$5 a lot", hint: "One small buy, then stop" },
-  { label: "Never mints", hint: "It will not create a token" },
+  { label: "$5 a lot, $15 cap", hint: "One name per turn. Same name waits 12 hours. Over $15 of stocks it holds." },
+  { label: "Pause or dry wallet stops it", hint: "Click Pause anytime. It also holds if USDC and SOL are gone." },
+  { label: "Does not mint again", hint: "$OPENGAP is already live. The bot will not create another." },
 ];
 
 export function LaunchDesk() {
@@ -75,7 +85,6 @@ export function LaunchDesk() {
     null,
   );
   const [busy, setBusy] = useState<string | null>(null);
-  const [pairMint, setPairMint] = useState<string>("");
 
   useEffect(() => {
     let cancelled = false;
@@ -93,10 +102,6 @@ export function LaunchDesk() {
         setDesk(claw as DeskPayload);
         setPools((launch as { pools?: MeteoraPool[] }).pools ?? []);
         setDbc((launch as { dbc?: { ready?: boolean; program?: string | null } }).dbc ?? null);
-        const firstStock = (claw as DeskPayload).pairs?.find(
-          (row) => !MAJOR.has(row.symbol),
-        );
-        setPairMint((current) => current || firstStock?.mint || "");
       } catch (error) {
         if (!cancelled) {
           setDesk({
@@ -113,20 +118,11 @@ export function LaunchDesk() {
     };
   }, []);
 
-  const stocks = useMemo(
-    () => (desk?.pairs ?? []).filter((row) => !MAJOR.has(row.symbol)),
-    [desk?.pairs],
-  );
-  const majors = useMemo(
-    () => (desk?.pairs ?? []).filter((row) => MAJOR.has(row.symbol)),
-    [desk?.pairs],
-  );
   const images = useMemo(() => {
     const map = new Map<string, string | null>();
     for (const row of desk?.pairs ?? []) map.set(row.symbol, row.imageUrl);
     return map;
   }, [desk?.pairs]);
-  const selected = (desk?.pairs ?? []).find((row) => row.mint === pairMint);
   const running = desk?.agent?.status === "running";
   const lastReply = desk?.messages?.find((row) => row.role === "assistant");
   const cheap = desk?.signal?.buy ?? [];
@@ -136,16 +132,13 @@ export function LaunchDesk() {
     return rows.slice(0, 8);
   }, [desk?.signal?.tape]);
 
-  async function run(action: "start" | "stop" | "cost" | "arm") {
+  async function run(action: "start" | "stop" | "arm") {
     setBusy(action);
     try {
       const response = await fetch("/api/clawpump", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          action,
-          quoteMint: action === "cost" ? pairMint || undefined : undefined,
-        }),
+        body: JSON.stringify({ action }),
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error ?? "ClawPump failed");
@@ -157,14 +150,6 @@ export function LaunchDesk() {
           payload.agent.status === "running"
             ? "Agent is watching prices"
             : "Agent paused",
-        );
-      }
-      if (payload.cost) {
-        setDesk((current) =>
-          current ? { ...current, cost: payload.cost } : current,
-        );
-        toast.success(
-          `Launch would cost ${payload.cost.standardCostSol} SOL. Nothing was created.`,
         );
       }
       if (payload.notes) {
@@ -207,8 +192,8 @@ export function LaunchDesk() {
             This is not another tape. OpenGap watches the same tokenized stocks
             and can buy a $5 lot when the live Jupiter price is at least 3%
             cheaper than the issuer mark. Tape is what you pay. Mark is not a
-            quote you can lift. Green means cheaper — that gap is the trade. It
-            will not create a new token.
+            quote you can lift. Green means cheaper — that gap is the trade.
+            $OPENGAP is live on ClawPump. The agent will not mint another.
           </p>
           <TourHint className="mt-4" />
         </div>
@@ -331,7 +316,7 @@ export function LaunchDesk() {
             <div>
               <dt className="text-xs text-muted-foreground">OpenGap token</dt>
               <dd className="mt-0.5 text-sm">
-                {desk?.agent?.tokenAddress ? "Live" : "Not created"}
+                {desk?.agent?.tokenAddress || TOKEN_MINT ? "Live" : "Not created"}
               </dd>
             </div>
           </dl>
@@ -376,6 +361,14 @@ export function LaunchDesk() {
                 See it listed
               </a>
             ) : null}
+            <a
+              href={TOKEN_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-8 items-center rounded-full px-3 text-sm text-muted-foreground underline-offset-4 hover:underline"
+            >
+              ${TOKEN_SYMBOL}
+            </a>
           </div>
         </Panel>
 
@@ -464,37 +457,79 @@ export function LaunchDesk() {
       ) : null}
 
       <Panel data-tour="launch-quote" className="bg-card/40">
-        <Eyebrow>If you launch a token later</Eyebrow>
-        <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-          This only shows what a launch would cost. Nothing is created when you
-          ask. Pair it with a stock name or SOL if you ever want one.
+        <Eyebrow>Token · ${TOKEN_SYMBOL}</Eyebrow>
+        <p className="mt-2 text-lg font-semibold tracking-tight">Live on ClawPump</p>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          Mint {shortAddress(TOKEN_MINT, 6)}. Launched 24 Sep 2026 against{" "}
+          <a href="https://x.com/Open_Gap" className="underline underline-offset-4" target="_blank" rel="noreferrer">
+            @Open_Gap
+          </a>
+          . Entry ticket for AnsemHack. Creator fees stay with the project. The
+          agent will not mint a second coin.
         </p>
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <select
-            value={pairMint}
-            onChange={(event) => setPairMint(event.target.value)}
-            className="h-8 rounded-full border border-border bg-background px-3 text-sm"
+        <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
+          {TOKEN_UTILITY.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={TOKEN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
           >
-            {majors.concat(stocks).map((row) => (
-              <option key={row.mint} value={row.mint}>
-                {row.symbol} · {row.name}
-              </option>
-            ))}
-          </select>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => run("cost")}
-            disabled={Boolean(busy)}
+            ClawPump
+          </a>
+          <a
+            href={TOKEN_SOLSCAN}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
           >
-            {busy === "cost" ? "Checking…" : "Check launch fee"}
-          </Button>
-          {selected ? (
-            <span className="text-xs text-muted-foreground">
-              Pair {selected.symbol}
-              {desk?.cost ? ` · about ${desk.cost.standardCostSol} SOL` : ""}
-            </span>
-          ) : null}
+            Solscan
+          </a>
+          <a
+            href={ANSEMHACK_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            AnsemHack
+          </a>
+        </div>
+        <p className="mt-6 text-xs font-medium text-muted-foreground">Roadmap</p>
+        <ul className="mt-2 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
+          {ROADMAP.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      </Panel>
+
+      <Panel>
+        <Eyebrow>Stock-paired Meteora pool</Eyebrow>
+        <p className="mt-2 text-lg font-semibold tracking-tight">{STOCK_POOL.name}</p>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          {STOCK_POOL.note} Quote is the PreStock, not SOL. $OPENGAP stays the
+          ClawPump coin.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={STOCK_POOL.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
+          >
+            Meteora
+          </a>
+          <a
+            href={`https://solscan.io/tx/${STOCK_POOL.signature}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            Create tx
+          </a>
         </div>
       </Panel>
 

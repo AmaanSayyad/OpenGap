@@ -1,8 +1,10 @@
 export const BRAND = "Opengap";
 export const TAGLINE = "Buy tokenized stocks when they're cheaper";
 export const LOGO_SRC = "/opengap.png";
-export const SITE_URL = "https://opengap.vercel.app";
+export const SITE_URL = "https://opengap.xyz";
 export const GITHUB_URL = "https://github.com/AmaanSayyad/OpenGap";
+export const X_URL = "https://x.com/Open_Gap";
+export const TELEGRAM_URL = "https://t.me/OpenGapp";
 
 export const GLOSSARY = {
   tape: "Tape is the live price on Jupiter — what you actually pay if you buy right now.",

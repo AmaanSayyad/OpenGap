@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
-import { BRAND, GITHUB_URL, SITE_URL, TAGLINE } from "@/lib/brand";
+import { BRAND, GITHUB_URL, SITE_URL, TAGLINE, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import { TOKEN_URL } from "@/lib/company";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,19 +20,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: `${BRAND} — ${TAGLINE}`,
   description:
-    "Buy tokenized stocks when the Jupiter tape is cheaper than the issuer mark. Tape is what you pay. Mark is the issuer. Green is the trade.",
+    "Buy tokenized stocks when the live price on Jupiter is cheaper than the official reference price from the issuer (PreStocks, or Yahoo on listed names).",
   applicationName: BRAND,
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: `${BRAND} — ${TAGLINE}`,
     description:
-      "Tape is the live Jupiter price. Mark is the issuer reference. Green means cheaper — that gap is the trade.",
+      "Buy tokenized stocks when the live price on Jupiter is cheaper than the official reference price from the issuer (PreStocks, or Yahoo on listed names).",
     url: SITE_URL,
     siteName: BRAND,
     type: "website",
   },
   other: {
     github: GITHUB_URL,
+    twitter: X_URL,
+    telegram: TELEGRAM_URL,
+    token: TOKEN_URL,
   },
   icons: {
     icon: [

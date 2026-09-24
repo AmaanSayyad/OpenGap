@@ -1,4 +1,5 @@
 import { DynamicBondingCurveClient } from "@meteora-ag/dynamic-bonding-curve-sdk";
+import { STOCK_POOL, TOKEN_MINT } from "@/lib/company";
 import { STOCK_QUOTES } from "@/lib/meteora-quotes";
 import { mainnetConnection } from "@/lib/server-wallet";
 import type { MeteoraPool } from "@/lib/types";
@@ -24,6 +25,7 @@ export async function getDbcStatus() {
 }
 
 const WATCH_MINTS = [
+  TOKEN_MINT,
   "PresTj4Yc2bAR197Er7wz4UUKSfqt6FryBEdAriBoQB",
   "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw",
   "PreweJYECqtQwBtpxHL171nL2K6umo692gTm7Q3rpgF",
@@ -74,6 +76,19 @@ export async function getMeteoraPools(): Promise<MeteoraPool[]> {
     } catch {
       continue;
     }
+  }
+
+  if (STOCK_POOL.pairAddress) {
+    pools.unshift({
+      name: STOCK_POOL.name,
+      dex: STOCK_POOL.dex,
+      pairAddress: STOCK_POOL.pairAddress,
+      base: STOCK_POOL.base,
+      quote: STOCK_POOL.quote,
+      priceUsd: null,
+      tvl: null,
+      volume24h: null,
+    });
   }
 
   const unique = new Map(pools.map((pool) => [pool.pairAddress, pool]));

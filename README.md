@@ -2,12 +2,15 @@
 
 <img src="public/opengap.png" alt="Opengap" width="72" height="72" />
 
-**Buy tokenized stocks when they're cheaper.**
+**Buy tokenized stocks when the live price on Jupiter is cheaper than the official reference price from the issuer (PreStocks, or Yahoo on listed names).**
 
-**Live:** [https://opengap.vercel.app](https://opengap.vercel.app)  
-**Source:** [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap)
+**Live:** [https://opengap.xyz](https://opengap.xyz)  
+**Source:** [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap)  
+**X:** [https://x.com/Open_Gap](https://x.com/Open_Gap)  
+**Telegram:** [https://t.me/OpenGapp](https://t.me/OpenGapp)  
+**Token:** [https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD)
 
-Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. It does not mint a token.
+Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** is live on ClawPump. The agent does not mint another.
 
 Not for US persons. Not advice.
 
@@ -61,7 +64,7 @@ One site, four desks, one rule: **green is cheaper than the mark.**
 | PreStocks | `/` | Private-company tape. Jupiter vs PreStocks mark. Buy / sell in USDC or SOL. |
 | Tessera | `/?desk=tessera` | T-tokens. Same buy flow. Different claim. |
 | Listed stocks | `/?desk=basis` | Yahoo cash vs xStock tape. Evidence only. |
-| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. Never mints. |
+| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP is live. Stock-paired Meteora DAMM: OPENGAP/SPACEX. |
 
 Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from the header. Portfolio is local fills plus live wallet lots.
 
@@ -245,7 +248,7 @@ sequenceDiagram
 
 ### ClawPump
 
-Launch desk. Custom skill. Buy the discount. Never mint.
+Launch desk. Custom skill. Buy the discount. $OPENGAP is live — never mint again.
 
 ```mermaid
 sequenceDiagram
@@ -265,7 +268,7 @@ sequenceDiagram
   else
     Claw-->>App: HOLD
   end
-  Note over Claw: No POST /launch. Never mint.
+  Note over Claw: No second memecoin. OPENGAP/SPACEX is a Meteora DAMM pool.
 ```
 
 ### Solana
@@ -303,7 +306,7 @@ Secrets never go in `NEXT_PUBLIC_*` or git.
 - **Jupiter** lite-api (Price v3, Swap v1)
 - **Meteora** Dynamic Bonding Curve SDK (venue checks, not a separate buy path)
 - **ClawPump** Partner API + custom skill (`skills/opengap-basis`)
-- **Vercel** — [opengap.vercel.app](https://opengap.vercel.app), Fluid Compute, cron `*/15` → `/api/clawpump/tick`
+- **Vercel** — [opengap.xyz](https://opengap.xyz), Fluid Compute, cron `*/15` → `/api/clawpump/tick`
 
 ---
 
@@ -344,27 +347,47 @@ Today: a free mainnet desk. Distribution is the tape. No AUM, no cut on Jupiter.
 If it earns later, the honest lines are:
 
 1. **Agent inventory** — people fund the OpenGap wallet; the bot keeps buying −3% lots. Revenue is performance or a small management fee, not a hidden swap tax.
-2. **Optional token later** — cost-quoted on Launch, never auto-minted. If it exists, it is a membership/fee token, not the product.
+2. **$OPENGAP** — live on ClawPump. Membership / creator-fee share, not the product. The agent will not mint another.
 3. **Alerts / pro tape** — gap webhooks, CSV, basket limits. Paid only if someone asks.
 
 No claim that this is a licensed venue.
 
 ---
 
+## Team
+
+**Amaan Sayyad (CEO)** — blockchain developer and entrepreneur. 42+ hackathon wins, 25+ shipped Web3 products, CEO of OpenGap. [X](https://x.com/amaanbiz) · [GitHub](https://github.com/AmaanSayyad) · [LinkedIn](https://www.linkedin.com/in/amaan-sayyad-/) · [Portfolio](https://amaan-sayyad-portfolio.vercel.app/) · [Proof](https://docs.google.com/document/d/1WQXjpoRdcEHiq3BiVaAT3jXeBmI9eFvKelK9EWdWOQA/edit?usp=sharing)
+
+Contract helpers: Abdulmajid Hassan (community), Konan (design), VR (graphics), Draheem (motion).
+
+## Market
+
+Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints away from the issuer mark. That gap is the market. OpenGap is the desk — and the bot — that buys only when live is cheaper than official.
+
+## Token
+
+**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap).
+
+Utility: AnsemHack entry ticket and creator-fee share. Not equity. Not the product. The agent will not mint a second coin.
+
+Long-term: the desk stays the company. The token is membership / fee share if the tape has volume. Roadmap is funded −3% buys, more names, and a kill-switch — not a new memecoin.
+
 ## Go-to-market
 
-1. Stocklana path (tape + Jupiter + Tessera + Meteora) and Ansem path (public agent + skill + no mint).
-2. **ClawPump marketplace** — agent is public; Launch desk is the product page.
-3. **Crypto Twitter** — one sentence: buy tokenized stocks when they're cheaper. Link the deepest green name.
+1. Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + live token).
+2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
+3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap) and [Telegram](https://t.me/OpenGapp). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name.
 4. **Wallet users** — Phantom in, one $25 Jupiter lot, fill stays in History.
 5. **Do not** pretend this is a US stock app. Legal line stays in the footer.
+
+Traction: live mainnet desk, public agent, funded trading wallet, token live. We do not invent user counts.
 
 ---
 
 ## Roadmap
 
 - Fund the agent wallet with USDC so HOLD is not the only decision
-- Optional OpenGap token, only when someone signs a launch on purpose
+- $OPENGAP is live; do not mint a second token
 - Tighter inventory and kill-switch on the skill
 - More PreStocks names as they list
 - Server-side fill archive (optional, opt-in) — today history is local
@@ -381,8 +404,10 @@ npm run dev
 ```
 
 Local: [http://localhost:3000](http://localhost:3000).  
-Live: [https://opengap.vercel.app](https://opengap.vercel.app).  
-Source: [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap).
+Live: [https://opengap.xyz](https://opengap.xyz).  
+Source: [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap).  
+X: [https://x.com/Open_Gap](https://x.com/Open_Gap).  
+Telegram: [https://t.me/OpenGapp](https://t.me/OpenGapp).
 
 | Variable | Where | Notes |
 | --- | --- | --- |

@@ -2,7 +2,7 @@
   "name": "opengap",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://opengap.vercel.app",
+  "homepage": "https://opengap.xyz",
   "repository": {
     "type": "git",
     "url": "https://github.com/AmaanSayyad/OpenGap.git"
@@ -17,11 +17,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@meteora-ag/cp-amm-sdk": "^1.4.10",
     "@meteora-ag/dynamic-bonding-curve-sdk": "^1.5.12",
+    "@solana/spl-token": "^0.4.15",
     "@solana/wallet-adapter-base": "^0.9.28",
     "@solana/wallet-adapter-react": "^0.15.40",
     "@solana/wallet-adapter-react-ui": "^0.9.40",
     "@solana/web3.js": "^1.99.0",
+    "bn.js": "^5.2.5",
     "bs58": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
