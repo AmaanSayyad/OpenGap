@@ -59,7 +59,7 @@ export function NavSearch({ rows }: { rows?: TapeRow[] }) {
   }, [query]);
 
   useEffect(() => {
-    function onKey(event: KeyboardEvent) {
+    function onKey(event: globalThis.KeyboardEvent) {
       const target = event.target;
       const typing =
         target instanceof HTMLInputElement ||
