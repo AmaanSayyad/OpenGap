@@ -51,7 +51,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "why",
     title: "Tape vs mark",
-    body: "Tape is Jupiter — what you actually pay. Mark is the issuer’s reference. Green means the tape is cheaper. That gap is why Opengap exists.",
+    body: "Tape is the live price on Jupiter — what you actually pay if you buy right now. Mark is the official reference from the issuer (PreStocks, or Yahoo on listed names). It is not a quote you can lift. Green means tape is cheaper than mark. That gap is the trade.",
   },
   {
     id: "discount",
@@ -70,14 +70,14 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "table",
     title: "Read a row",
-    body: "Tape, mark, and the gap. Green is a discount. Red is a premium. Discount hides rich names. Trade opens the sheet.",
+    body: "Tape is what you pay on Jupiter. Mark is the issuer, not a quote you can lift. Green means tape is cheaper — that gap is the trade. Red is a premium. Discount hides rich names.",
     target: "table",
     desk: "prestocks",
   },
   {
     id: "book",
     title: "Your portfolio",
-    body: "SOL, USDC, and any token lots, with live dollar values. Header Portfolio opens the full page.",
+    body: "Book is the old name for this panel. It is your portfolio now: SOL, USDC, and any lots you hold, with live dollar values. Header Portfolio opens the full page.",
     target: "book",
     desk: "prestocks",
   },
@@ -148,7 +148,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "wallet-book",
     title: "This is your portfolio",
-    body: "The wallet you just connected. SOL, USDC, and any token lots, with live dollar values.",
+    body: "The wallet you just connected. Book used to mean this — the app now says Portfolio: SOL, USDC, and any lots, with live dollar values.",
     target: "book",
     desk: "prestocks",
     href: "/",
@@ -163,7 +163,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "wallet-portfolio",
     title: "Full portfolio",
-    body: "The portfolio page — cash, lots, history, and P&L for this wallet. Header Portfolio opens it anytime.",
+    body: "The portfolio page — cash, lots, history, and P&L. Book was the old name for this. Header Portfolio opens it anytime.",
     target: "portfolio-page",
     href: "/portfolio",
   },

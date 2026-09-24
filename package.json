@@ -2,6 +2,14 @@
   "name": "opengap",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://opengap.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AmaanSayyad/OpenGap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AmaanSayyad/OpenGap/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

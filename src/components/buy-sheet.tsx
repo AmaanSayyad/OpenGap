@@ -253,7 +253,8 @@ export function BuySheet({
             {row.name}
           </SheetTitle>
           <SheetDescription>
-            Jupiter {side === "buy" ? "buy" : "sell"}. Route often hits Meteora.
+            Tape is what you pay on Jupiter right now. Mark is the issuer
+            reference — not a quote you can lift. Green means cheaper.
           </SheetDescription>
         </SheetHeader>
 

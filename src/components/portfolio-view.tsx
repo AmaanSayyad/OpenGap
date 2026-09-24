@@ -64,7 +64,9 @@ export function PortfolioView() {
             <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
               {connectedOwner
                 ? `On-chain for ${shortAddress(connectedOwner, 4)}. Fills stay on this device.`
-                : "Test wallet on mainnet until you connect. Fills stay on this device."}
+                : "Test wallet on mainnet until you connect. Fills stay on this device."}{" "}
+              Book was the old name for this page: SOL, USDC, and any lots you
+              hold, with live dollar values.
             </p>
           </div>
           <div className="text-left sm:text-right">
@@ -243,7 +245,8 @@ export function PortfolioView() {
                 <div>
                   <Eyebrow>Cheap to mark</Eyebrow>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Tape below the issuer. Not locked profit.
+                    Green names: tape cheaper than mark. That gap is the trade,
+                    not locked profit.
                   </p>
                 </div>
                 <ul className="flex flex-col gap-1">

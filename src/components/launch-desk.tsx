@@ -205,8 +205,10 @@ export function LaunchDesk() {
           </PageTitle>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">
             This is not another tape. OpenGap watches the same tokenized stocks
-            and can buy a $5 lot when the live price is at least 3% cheaper than
-            the official price. It will not create a new token.
+            and can buy a $5 lot when the live Jupiter price is at least 3%
+            cheaper than the issuer mark. Tape is what you pay. Mark is not a
+            quote you can lift. Green means cheaper — that gap is the trade. It
+            will not create a new token.
           </p>
           <TourHint className="mt-4" />
         </div>

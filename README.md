@@ -4,6 +4,9 @@
 
 **Buy tokenized stocks when they're cheaper.**
 
+**Live:** [https://opengap.vercel.app](https://opengap.vercel.app)  
+**Source:** [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap)
+
 Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. It does not mint a token.
 
 Not for US persons. Not advice.
@@ -57,7 +60,7 @@ One site, four desks, one rule: **green is cheaper than the mark.**
 | --- | --- | --- |
 | PreStocks | `/` | Private-company tape. Jupiter vs PreStocks mark. Buy / sell in USDC or SOL. |
 | Tessera | `/?desk=tessera` | T-tokens. Same buy flow. Different claim. |
-| Listed stocks | `/?desk=listed` | Yahoo cash vs xStock tape. Evidence only. |
+| Listed stocks | `/?desk=basis` | Yahoo cash vs xStock tape. Evidence only. |
 | Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. Never mints. |
 
 Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from the header. Portfolio is local fills plus live wallet lots.
@@ -82,7 +85,7 @@ Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from t
 
 1. Server pulls PreStocks (or Tessera) marks.
 2. Server asks Jupiter Price v3 for those mints and applies Token-2022 scaled UI amounts.
-3. Gap = `(tape − mark) / mark`. Green if tape is cheaper.
+3. Gap = `(tape − mark) / mark`. Green if tape is cheaper than mark. That gap is the trade.
 4. You pick a size. The app asks Jupiter Swap v1. You sign. The route often hops Meteora DLMM.
 5. The fill is stored in this browser and valued against the live mark.
 6. Every 15 minutes a Vercel cron can hand the same gap list to the OpenGap agent. If a name is ≤ −3% and the wallet has USDC, it may buy $5. Otherwise it holds.
@@ -99,7 +102,7 @@ sequenceDiagram
   participant Cron as Vercel cron
 
   Trader->>UI: Open desk / token page
-  UI->>Tape: GET live book
+  UI->>Tape: GET live tape
   Tape->>Pre: Marks + ScaledUiAmount
   Tape->>Jup: Price v3 (mints)
   Tape-->>UI: tape, mark, gap
@@ -133,6 +136,161 @@ sequenceDiagram
 | **ClawPump** | Launch desk, cron, skill | Partner API v1 + platform custom skill. Agent id is public. Dashboard key stays server-side. No `POST /launch` mint. |
 | **Solana** | Wallet, RPC, Solscan | Mainnet. Wallet Standard (Phantom). Optional `NEXT_PUBLIC_SOLANA_RPC`. |
 
+### PreStocks
+
+Official mark. Token-2022 `ScaledUiAmount`. Not the tape.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Pre as PreStocks
+  participant Jup as Jupiter
+
+  Trader->>App: Open PreStocks desk
+  App->>Pre: Marks + ScaledUiAmount
+  Pre-->>App: Official mark
+  App->>Jup: Price v3 on those mints
+  Jup-->>App: Tape
+  App-->>Trader: Gap vs PreStocks mark
+  Note over Pre: Mark is a reference. Not a quote you can lift.
+```
+
+### Jupiter
+
+Tape you pay. Quote you sign. Price v3 + Swap v1.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Jup as Jupiter lite-api
+  participant Sol as Solana
+
+  App->>Jup: Price v3 (mints)
+  Jup-->>App: Tape USD
+  Trader->>App: Buy or sell
+  App->>Jup: Swap v1 quote
+  Jup-->>Trader: Route + out amount
+  Trader->>Sol: Sign
+  Jup->>Sol: Execute swap
+  Sol-->>App: Fill
+```
+
+### Meteora
+
+Hops on the Jupiter route. DBC is venue evidence. Not a second buy button.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Jup as Jupiter
+  participant Met as Meteora
+  participant Sol as Solana
+
+  Trader->>App: Size
+  App->>Jup: Swap v1 quote
+  Jup->>Met: DLMM hop (e.g. SPACEX)
+  Met-->>Jup: Path + price impact
+  Jup-->>App: Show hops
+  App->>Met: Launch desk DBC list
+  Met-->>App: Pools (evidence only)
+  Trader->>Sol: Sign Jupiter swap
+  Note over Met: Buys still go through Jupiter.
+```
+
+### Tessera
+
+T-tokens. Same buy flow. Loan claim, not PreStock equity.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Tess as Tessera
+  participant Jup as Jupiter
+
+  Trader->>App: Open Tessera desk
+  App->>Tess: T-tokens + holders
+  Tess-->>App: T-OpenAI, T-Kalshi, T-SpaceX
+  App->>Jup: Price v3
+  Jup-->>App: Tape
+  App-->>Trader: Gap vs Tessera mark
+  Note over Tess: T-OpenAI is not OPENAI.
+```
+
+### xStocks / Yahoo
+
+Listed desk. Cash vs on-chain. Evidence only.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Yahoo as Yahoo
+  participant XS as xStocks
+  participant Jup as Jupiter
+
+  Trader->>App: Open listed desk
+  App->>Yahoo: Cash last
+  Yahoo-->>App: Mark (AAPL, etc.)
+  App->>XS: On-chain xStock mint
+  XS-->>App: Listed token
+  App->>Jup: xStock tape
+  Jup-->>App: On-chain print
+  App-->>Trader: Dollar gap
+  Note over App,Yahoo: No buy from this table.
+```
+
+### ClawPump
+
+Launch desk. Custom skill. Buy the discount. Never mint.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Claw as ClawPump
+  participant Jup as Jupiter
+  participant Sol as Solana
+
+  Trader->>App: Open Launch
+  App->>Claw: Partner API (status, skill, chat)
+  Claw-->>App: Agent running
+  App->>Claw: Tape vs mark signal
+  alt gap <= -3% and USDC
+    Claw->>Jup: Swap 5 USDC
+    Jup->>Sol: Agent fill
+  else
+    Claw-->>App: HOLD
+  end
+  Note over Claw: No POST /launch. Never mint.
+```
+
+### Solana
+
+Mainnet. Wallet Standard. RPC. Solscan.
+
+```mermaid
+sequenceDiagram
+  actor Trader
+  participant App as Opengap
+  participant Wallet as Phantom / Wallet Standard
+  participant Sol as Solana RPC
+  participant Scan as Solscan
+
+  Trader->>Wallet: Connect
+  Wallet-->>App: Pubkey
+  App->>Sol: Balances (SOL, USDC, lots)
+  Sol-->>App: Portfolio
+  Trader->>Wallet: Sign Jupiter swap
+  Wallet->>Sol: Submit tx
+  Sol-->>App: Signature
+  App->>Scan: Fill link
+  Scan-->>Trader: On-chain proof
+```
+
 Secrets never go in `NEXT_PUBLIC_*` or git.
 
 ---
@@ -145,7 +303,7 @@ Secrets never go in `NEXT_PUBLIC_*` or git.
 - **Jupiter** lite-api (Price v3, Swap v1)
 - **Meteora** Dynamic Bonding Curve SDK (venue checks, not a separate buy path)
 - **ClawPump** Partner API + custom skill (`skills/opengap-basis`)
-- **Vercel** — Fluid Compute, cron `*/15` → `/api/clawpump/tick`
+- **Vercel** — [opengap.vercel.app](https://opengap.vercel.app), Fluid Compute, cron `*/15` → `/api/clawpump/tick`
 
 ---
 
@@ -195,7 +353,7 @@ No claim that this is a licensed venue.
 
 ## Go-to-market
 
-1. **Hackathon judges** — Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + skill + no mint).
+1. Stocklana path (tape + Jupiter + Tessera + Meteora) and Ansem path (public agent + skill + no mint).
 2. **ClawPump marketplace** — agent is public; Launch desk is the product page.
 3. **Crypto Twitter** — one sentence: buy tokenized stocks when they're cheaper. Link the deepest green name.
 4. **Wallet users** — Phantom in, one $25 Jupiter lot, fill stays in History.
@@ -222,7 +380,9 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Local: [http://localhost:3000](http://localhost:3000).  
+Live: [https://opengap.vercel.app](https://opengap.vercel.app).  
+Source: [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap).
 
 | Variable | Where | Notes |
 | --- | --- | --- |
@@ -238,7 +398,12 @@ Never commit `.env.local`.
 
 ## How to read a row
 
-- **Tape** — Jupiter `usdPrice`, split-aware. What you pay now.
-- **Mark** — Issuer (or Yahoo on listed).
-- **To mark** — `(tape − mark) / mark`. Green discount. Red premium.
-- After a buy, **fill vs mark** stays in this browser and links out on Solscan.
+**Tape** is the live price on Jupiter — what you actually pay if you buy right now.
+
+**Mark** is the official reference price from the issuer (PreStocks, or Yahoo on listed names). It is not a quote you can lift.
+
+**Book** is the old name for your portfolio: SOL, USDC, and any lots you hold, with live dollar values. The app now says Portfolio everywhere.
+
+**Green** means tape is cheaper than mark. That gap is the trade.
+
+On the table, **To mark** is `(tape − mark) / mark`. Green is a discount. Red is a premium. After a buy, fill vs mark stays in this browser and links out on Solscan.

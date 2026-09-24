@@ -22,6 +22,10 @@ export function HoldingsBook({ refresh = 0 }: { refresh?: number }) {
             {connectedOwner ? "Connected wallet" : "Test wallet"} ·{" "}
             {book ? shortAddress(book.owner, 4) : "…"}
           </p>
+          <p className="mt-2 text-xs leading-5 text-muted-foreground">
+            SOL, USDC, and any lots you hold, with live dollar values. Used to
+            be called Book.
+          </p>
         </div>
         <Link
           href="/portfolio"

@@ -66,13 +66,24 @@ export function TapeTable({
               </SortLabel>
             </TableHead>
             <TableHead className="hidden w-[11.5rem] sm:table-cell">Print</TableHead>
-            <TableHead className="text-right">
+            <TableHead
+              className="text-right"
+              title="Live Jupiter price — what you actually pay"
+            >
               <SortLabel active={sort === "tape"} onClick={() => onSort?.("tape")}>
                 Tape
               </SortLabel>
             </TableHead>
-            <TableHead className="text-right">Mark</TableHead>
-            <TableHead className="text-right">
+            <TableHead
+              className="text-right"
+              title="Issuer reference. Not a quote you can lift."
+            >
+              Mark
+            </TableHead>
+            <TableHead
+              className="text-right"
+              title="Green means tape is cheaper than mark. That gap is the trade."
+            >
               <SortLabel active={sort === "gap"} onClick={() => onSort?.("gap")}>
                 Gap
               </SortLabel>

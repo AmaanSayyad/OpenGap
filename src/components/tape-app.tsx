@@ -295,8 +295,10 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
               {cheap
                 ? `Right now ${cheap.symbol} trades ${formatPct(cheap.premium)} to mark — tape ${formatPrice(cheap.execPrice)} vs issuer ${formatPrice(cheap.markPrice)}.`
                 : "Four steps: pick a name, read the gap, watch Jupiter, then buy."}{" "}
-              Green means cheaper than the issuer. Search for a name in the
-              header.
+              Tape is the live Jupiter price — what you actually pay. Mark is
+              the issuer reference, not a quote you can lift. Green means tape
+              is cheaper than mark. That gap is the trade. Search for a name in
+              the header.
             </p>
           </div>
           {cheap ? (

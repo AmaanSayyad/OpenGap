@@ -1,3 +1,4 @@
+import { GITHUB_URL, SITE_URL } from "@/lib/brand";
 import type { Desk } from "@/lib/tour";
 
 export const DESK_LINKS: Array<{
@@ -17,6 +18,8 @@ export const FOOTER_LINKS = {
     { label: "Portfolio", href: "/portfolio" },
     { label: "Guide", href: "/?tour=1" },
     { label: "Buy all", href: "/?desk=prestocks" },
+    { label: "Live", href: SITE_URL },
+    { label: "GitHub", href: GITHUB_URL },
   ],
   venues: [
     { label: "Jupiter", href: "https://jup.ag", logo: "/logos/jupiter.png" },

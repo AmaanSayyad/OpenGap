@@ -1,6 +1,6 @@
 {
   "name": "OpenGap Basis Trader",
-  "description": "Buy tokenized stocks when the Jupiter tape is cheaper than the issuer mark. Never launch a token.",
+  "description": "Buy tokenized stocks when the Jupiter tape is cheaper than the issuer mark. Tape is what you pay. Mark is the issuer. Green is the trade. Never launch a token.",
   "author": "opengap",
   "tags": ["trading", "defi", "prestocks", "tessera", "solana"],
   "version": "1.0.0"

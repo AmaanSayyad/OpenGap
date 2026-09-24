@@ -24,15 +24,25 @@ export function SiteFooter() {
             <p className="mt-3 text-sm leading-6 text-muted-foreground">{TAGLINE}.</p>
           </div>
           <nav className="flex flex-wrap gap-2" aria-label="Product">
-            {FOOTER_LINKS.product.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {FOOTER_LINKS.product.map((item) => {
+              const className =
+                "inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground";
+              return item.href.startsWith("http") ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={className}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link key={item.href} href={item.href} className={className}>
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 

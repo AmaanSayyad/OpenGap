@@ -26,6 +26,7 @@ import {
   resolveStepHref,
   type Desk,
 } from "@/lib/tour";
+import { GLOSSARY } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const CARD_W = 300;
@@ -410,8 +411,8 @@ function Spotlight({
 
 export function TourHint({ className }: { className?: string }) {
   return (
-    <p className={cn("text-xs text-muted-foreground", className)}>
-      Tape is what you pay. Mark is the issuer. Green is cheaper.
+    <p className={cn("max-w-2xl text-xs leading-5 text-muted-foreground", className)}>
+      {GLOSSARY.tape} {GLOSSARY.mark} {GLOSSARY.green}
     </p>
   );
 }
