@@ -22,6 +22,7 @@ import {
   WSOL_DECIMALS,
   WSOL_MINT,
 } from "@/lib/constants";
+import { formatPlatformFee, PLATFORM_FEE_LABEL } from "@/lib/fees";
 import { formatPct, formatPrice } from "@/lib/format";
 import { executeSwap } from "@/lib/swap";
 import { useLastFill, type LastFill } from "@/hooks/use-last-fill";
@@ -420,6 +421,12 @@ export function BuySheet({
                 {live.loading && !outLabel ? "…" : (outLabel ?? "—")}
               </span>
             </div>
+            <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+              <span>{PLATFORM_FEE_LABEL}</span>
+              <span className="font-mono">
+                {quote ? formatPlatformFee(quote, row, side, pay) : "—"}
+              </span>
+            </div>
             <div className="mt-2 flex items-center justify-between gap-2 text-xs text-muted-foreground">
               <span>Quote refreshes in {live.left}s</span>
               <button
@@ -467,7 +474,8 @@ export function BuySheet({
                 {row.issuer === "tessera"
                   ? "Tessera T-tokens are loan participation, not equity."
                   : "PreStocks are economic exposure only."}{" "}
-                Not available to US persons. Not advice.
+                OpenGap takes 1% on every Jupiter buy and sell. Not available to
+                US persons. Not advice.
               </p>
             </>
           )}

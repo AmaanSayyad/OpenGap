@@ -22,6 +22,13 @@ export function mainnetConnection() {
   );
 }
 
+export function sendConnection() {
+  return new Connection(
+    process.env.SOLANA_SEND_RPC ?? "https://api.mainnet-beta.solana.com",
+    "confirmed",
+  );
+}
+
 export function devnetConnection() {
   return new Connection(
     process.env.SOLANA_DEVNET_RPC ?? "https://api.devnet.solana.com",
@@ -44,10 +51,13 @@ export async function getWalletStatus() {
     })),
   ]);
 
-  const usdcAmount = usdcAccounts.value.reduce((sum, account) => {
+  let usdcAmount = usdcAccounts.value.reduce((sum, account) => {
     const amount = account.account.data.parsed?.info?.tokenAmount?.uiAmount;
     return sum + (typeof amount === "number" ? amount : 0);
   }, 0);
+  if (usdcAmount === 0) {
+    usdcAmount = await getTokenUiAmount(pubkey, USDC_MINT, sendConnection());
+  }
 
   return {
     publicKey: pubkey.toBase58(),
@@ -57,9 +67,42 @@ export async function getWalletStatus() {
   };
 }
 
+export async function getTokenUiAmount(
+  owner: PublicKey | string,
+  mint: string,
+  connection = sendConnection(),
+) {
+  const accounts = await connection
+    .getParsedTokenAccountsByOwner(new PublicKey(owner), {
+      mint: new PublicKey(mint),
+    })
+    .catch(() => ({ value: [] }));
+  return accounts.value.reduce((sum, account) => {
+    const amount = account.account.data.parsed?.info?.tokenAmount?.uiAmount;
+    return sum + (typeof amount === "number" ? amount : 0);
+  }, 0);
+}
+
+export async function getTokenRawAmount(
+  owner: PublicKey | string,
+  mint: string,
+  connection = sendConnection(),
+) {
+  const accounts = await connection
+    .getParsedTokenAccountsByOwner(new PublicKey(owner), {
+      mint: new PublicKey(mint),
+    })
+    .catch(() => ({ value: [] }));
+  return accounts.value.reduce((sum, account) => {
+    const amount = account.account.data.parsed?.info?.tokenAmount?.amount;
+    const raw = Number(amount ?? 0);
+    return sum + (Number.isFinite(raw) ? raw : 0);
+  }, 0);
+}
+
 export async function executeServerSwap(quote: JupiterQuote) {
   const keypair = getTestKeypair();
-  const connection = mainnetConnection();
+  const connection = sendConnection();
   const { swapTransaction } = await getJupiterSwap({
     quoteResponse: quote,
     userPublicKey: keypair.publicKey.toBase58(),
@@ -75,14 +118,5 @@ export async function executeServerSwap(quote: JupiterQuote) {
 }
 
 export async function getMintBalance(mint: string) {
-  const keypair = getTestKeypair();
-  const accounts = await mainnetConnection()
-    .getParsedTokenAccountsByOwner(keypair.publicKey, {
-      mint: new PublicKey(mint),
-    })
-    .catch(() => ({ value: [] }));
-  return accounts.value.reduce((sum, account) => {
-    const amount = account.account.data.parsed?.info?.tokenAmount?.uiAmount;
-    return sum + (typeof amount === "number" ? amount : 0);
-  }, 0);
+  return getTokenUiAmount(getTestKeypair().publicKey, mint);
 }

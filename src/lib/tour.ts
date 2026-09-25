@@ -63,7 +63,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "trade",
     title: "Buy and sell",
-    body: "Pick a name. Jupiter quotes a live route — hops often land on Meteora. Buy, or Sell with Max of what you hold.",
+    body: "Pick a name. Jupiter quotes a live route — hops often land on Meteora. Buy, or Sell with Max of what you hold. OpenGap takes 1% on every fill.",
     target: "trade",
     desk: "prestocks",
   },

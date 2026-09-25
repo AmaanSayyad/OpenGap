@@ -14,6 +14,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { DEFAULT_BASKET_USDC, USDC_DECIMALS, USDC_MINT } from "@/lib/constants";
+import { PLATFORM_FEE_LABEL } from "@/lib/fees";
 import { formatPct, formatPrice } from "@/lib/format";
 import { executeSwap, requestQuote } from "@/lib/swap";
 import type { TapeResponse } from "@/lib/types";
@@ -83,7 +84,7 @@ export function BasketSheet({
           </SheetTitle>
           <SheetDescription>
             Split one USDC amount evenly across every live PreStock. Each name
-            is its own Jupiter buy.
+            is its own Jupiter buy and includes a {PLATFORM_FEE_LABEL}.
           </SheetDescription>
         </SheetHeader>
 

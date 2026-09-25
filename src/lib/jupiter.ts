@@ -2,7 +2,9 @@ import {
   DEFAULT_SLIPPAGE_BPS,
   JUPITER_QUOTE_API,
   JUPITER_SWAP_API,
+  PLATFORM_FEE_BPS,
 } from "@/lib/constants";
+import { resolvePlatformFeeAccount } from "@/lib/platform-fee";
 
 export type JupiterHop = {
   percent?: number;
@@ -27,6 +29,10 @@ export type JupiterQuote = {
   priceImpactPct: string;
   routePlan: JupiterHop[];
   swapUsdValue?: string;
+  platformFee?: {
+    amount: string;
+    feeBps: number;
+  } | null;
 };
 
 export async function getJupiterQuote(params: {
@@ -34,13 +40,16 @@ export async function getJupiterQuote(params: {
   outputMint: string;
   amount: number;
   slippageBps?: number;
+  platformFeeBps?: number;
 }) {
   const search = new URLSearchParams({
     inputMint: params.inputMint,
     outputMint: params.outputMint,
     amount: String(params.amount),
     slippageBps: String(params.slippageBps ?? DEFAULT_SLIPPAGE_BPS),
+    platformFeeBps: String(params.platformFeeBps ?? PLATFORM_FEE_BPS),
     restrictIntermediateTokens: "true",
+    instructionVersion: "V2",
   });
 
   const response = await fetch(`${JUPITER_QUOTE_API}?${search.toString()}`, {
@@ -48,7 +57,7 @@ export async function getJupiterQuote(params: {
   });
 
   if (!response.ok) {
-    throw new Error(`Jupiter quote failed (${response.status})`);
+    throw new Error(await jupiterError("quote", response));
   }
 
   return (await response.json()) as JupiterQuote;
@@ -58,6 +67,9 @@ export async function getJupiterSwap(params: {
   quoteResponse: JupiterQuote;
   userPublicKey: string;
 }) {
+  const feeBps = params.quoteResponse.platformFee?.feeBps ?? PLATFORM_FEE_BPS;
+  const feeAccount =
+    feeBps > 0 ? await resolvePlatformFeeAccount(params.quoteResponse) : undefined;
   const response = await fetch(JUPITER_SWAP_API, {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -67,12 +79,19 @@ export async function getJupiterSwap(params: {
       wrapAndUnwrapSol: true,
       dynamicComputeUnitLimit: true,
       prioritizationFeeLamports: "auto",
+      ...(feeAccount ? { feeAccount } : {}),
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`Jupiter swap failed (${response.status})`);
+    throw new Error(await jupiterError("swap", response));
   }
 
   return (await response.json()) as { swapTransaction: string };
+}
+
+async function jupiterError(kind: "quote" | "swap", response: Response) {
+  const body = await response.text();
+  const detail = body.slice(0, 240).trim();
+  return `Jupiter ${kind} failed (${response.status})${detail ? `: ${detail}` : ""}`;
 }

@@ -1,5 +1,14 @@
 import Link from "next/link";
-import { Bot, CandlestickChart, Layers, Scale } from "lucide-react";
+import {
+  BookOpen,
+  Bot,
+  CandlestickChart,
+  Layers,
+  Scale,
+  ShoppingBasket,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { BRAND, TAGLINE } from "@/lib/brand";
 import { TOKEN_MINT, TOKEN_SOLSCAN, TOKEN_SYMBOL } from "@/lib/company";
@@ -11,6 +20,37 @@ const DESK_ICONS = {
   basis: Scale,
   launch: Bot,
 } as const;
+
+const PRODUCT_ICONS: Record<string, LucideIcon> = {
+  Portfolio: Wallet,
+  Guide: BookOpen,
+  "Buy all": ShoppingBasket,
+};
+
+function FooterMark({ src }: { src: string }) {
+  if (src.endsWith(".svg")) {
+    return (
+      <span
+        aria-hidden
+        className="inline-block size-3.5 bg-current"
+        style={{
+          maskImage: `url(${src})`,
+          WebkitMaskImage: `url(${src})`,
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+          maskPosition: "center",
+          WebkitMaskPosition: "center",
+          maskSize: "contain",
+          WebkitMaskSize: "contain",
+        }}
+      />
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt="" width={14} height={14} className="size-3.5 object-contain" />
+  );
+}
 
 export function SiteFooter() {
   return (
@@ -26,8 +66,14 @@ export function SiteFooter() {
           </div>
           <nav className="flex flex-wrap gap-2" aria-label="Product">
             {FOOTER_LINKS.product.map((item) => {
+              const Icon = PRODUCT_ICONS[item.label];
               const className =
-                "inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground";
+                "inline-flex h-8 items-center gap-1.5 rounded-full bg-muted px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground";
+              const mark = item.logo ? (
+                <FooterMark src={item.logo} />
+              ) : Icon ? (
+                <Icon className="size-3.5" aria-hidden />
+              ) : null;
               return item.href.startsWith("http") ? (
                 <a
                   key={item.href}
@@ -36,10 +82,12 @@ export function SiteFooter() {
                   rel="noreferrer"
                   className={className}
                 >
+                  {mark}
                   {item.label}
                 </a>
               ) : (
                 <Link key={item.href} href={item.href} className={className}>
+                  {mark}
                   {item.label}
                 </Link>
               );
@@ -95,17 +143,17 @@ export function SiteFooter() {
 
       <div className="border-t border-border/60">
         <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-3 px-4 py-4 text-xs text-muted-foreground sm:px-6">
-          <p className="min-w-0">
-            <span className="mr-2">${TOKEN_SYMBOL} CA</span>
+          <div className="min-w-0">
+            <p className="text-xs font-medium">${TOKEN_SYMBOL} CA</p>
             <a
               href={TOKEN_SOLSCAN}
               target="_blank"
               rel="noreferrer"
-              className="break-all font-mono text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"
+              className="mt-1.5 flex min-w-0 overflow-x-auto rounded-xl bg-muted/70 px-3 py-2 font-mono text-[11px] leading-none text-foreground/90 hover:text-foreground sm:text-xs"
             >
-              {TOKEN_MINT}
+              <span className="whitespace-nowrap">{TOKEN_MINT}</span>
             </a>
-          </p>
+          </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="inline-flex items-center gap-2">
               © 2026 {BRAND}
@@ -114,7 +162,7 @@ export function SiteFooter() {
               <img src="/logos/sol.png" alt="" width={14} height={14} className="size-3.5 object-contain" />
               Mainnet Solana
             </p>
-            <p>Not for US persons. Not advice.</p>
+            <p>1% platform fee on Jupiter buys and sells. Not for US persons. Not advice.</p>
           </div>
         </div>
       </div>

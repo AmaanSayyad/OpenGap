@@ -16,3 +16,7 @@ export const HIDDEN_SYMBOLS = new Set(["FIGUREAI"]);
 export const DEFAULT_BUY_USDC = 25;
 export const DEFAULT_BASKET_USDC = 80;
 export const DEFAULT_SLIPPAGE_BPS = 100;
+export const PLATFORM_FEE_BPS = 100;
+export const PLATFORM_FEE_WALLET =
+  process.env.PLATFORM_FEE_WALLET?.trim() ||
+  "5zhihBK87rutEfE6aSw93GNF6EMZk8L6nppmxorLNzYZ";

@@ -79,7 +79,7 @@ Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from t
 ## Key features
 
 - Split-aware Jupiter **tape** next to issuer **mark**, with gap in percent
-- Buy / sell sheet that quotes Jupiter Swap v1 and shows Meteora hops
+- Buy / sell sheet that quotes Jupiter Swap v1, takes a disclosed **1% platform fee**, and shows Meteora hops
 - Token pages, portfolio, local fill history with Solscan links
 - Buy every name (equal USDC split) and a running ticker
 - Tessera vs PreStocks claim split so T-OpenAI is not OPENAI
@@ -95,7 +95,7 @@ Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from t
 1. Server pulls PreStocks (or Tessera) marks.
 2. Server asks Jupiter Price v3 for those mints and applies Token-2022 scaled UI amounts.
 3. Gap = `(tape − mark) / mark`. Green if tape is cheaper than mark. That gap is the trade.
-4. You pick a size. The app asks Jupiter Swap v1. You sign. The route often hops Meteora DLMM.
+4. You pick a size. The app asks Jupiter Swap v1 with a **1% platform fee**. You sign. The route often hops Meteora DLMM. The quote you see is already after the cut.
 5. The fill is stored in this browser and valued against the live mark.
 6. Every 15 minutes a Vercel cron can hand the same gap list to the OpenGap agent. If a name is ≤ −3% and the wallet has USDC, it may buy $5. Otherwise it holds.
 
@@ -350,12 +350,12 @@ skills/opengap-basis/   agent instructions (never mint)
 
 ## Business model
 
-Today: a free mainnet desk. Distribution is the tape. No AUM, no cut on Jupiter.
+The desk charges **1% on every Jupiter buy and sell**. The quote is already net of the fee. The swap sends it in USDC or SOL to the OpenGap fee wallet `5zhihBK87rutEfE6aSw93GNF6EMZk8L6nppmxorLNzYZ`. It is on the ticket, the basket, and the footer — not a hidden tax.
 
-If it earns later, the honest lines are:
+Other lines:
 
-1. **Agent inventory** — people fund the OpenGap wallet; the bot keeps buying −3% lots. Revenue is performance or a small management fee, not a hidden swap tax.
-2. **$OPENGAP** — live on ClawPump. Membership / creator-fee share, not the product. The agent will not mint another.
+1. **$OPENGAP** — live on ClawPump. Creator fees stay with the project. Membership / fee-share, not equity, not a second take on the swap. The agent will not mint another.
+2. **Agent inventory** — people can fund the OpenGap trading wallet so the bot keeps buying −3% lots. That is inventory, not another cut.
 3. **Alerts / pro tape** — gap webhooks, CSV, basket limits. Paid only if someone asks.
 
 No claim that this is a licensed venue.
@@ -376,16 +376,16 @@ Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints aw
 
 **$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
 
-Utility: AnsemHack entry ticket and creator-fee share. Not equity. Not the product. The agent will not mint a second coin.
+Utility: AnsemHack entry ticket and $OPENGAP creator-fee share. Desk revenue is the 1% Jupiter platform fee. Not equity. Not the product. The agent will not mint a second coin.
 
-Long-term: the desk stays the company. The token is membership / fee share if the tape has volume. Roadmap is funded −3% buys, more names, and a kill-switch — not a new memecoin.
+Long-term: the desk stays the company. Volume on the tape is the fee line. The token is membership / creator-fee share, not a second swap tax. Roadmap is funded −3% buys, more names, and a kill-switch — not a new memecoin.
 
 ## Go-to-market
 
 1. Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + live token).
 2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
 3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap) and [Telegram](https://t.me/OpenGapp). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name.
-4. **Wallet users** — Phantom in, one $25 Jupiter lot, fill stays in History.
+4. **Wallet users** — Phantom in, one $25 Jupiter lot, 1% platform fee, fill stays in History.
 5. **Do not** pretend this is a US stock app. Legal line stays in the footer.
 
 Traction: live mainnet desk, public agent, funded trading wallet, token live. We do not invent user counts.
@@ -394,6 +394,7 @@ Traction: live mainnet desk, public agent, funded trading wallet, token live. We
 
 ## Roadmap
 
+- 1% platform fee is live on Jupiter buys and sells
 - Fund the agent wallet with USDC so HOLD is not the only decision
 - $OPENGAP is live; do not mint a second token
 - Tighter inventory and kill-switch on the skill
@@ -420,6 +421,7 @@ Local: [http://localhost:3000](http://localhost:3000). Live links are in the tab
 | `CLAWPUMP_AGENT_ID` | Server | Defaults to the OpenGap agent. |
 | `CRON_SECRET` | Server | Protects `/api/clawpump/tick`. |
 | `SOLANA_PRIVATE_KEY` | Server | Optional test wallet only. |
+| `PLATFORM_FEE_WALLET` | Server | Receives the 1% Jupiter fee. Defaults to `5zhihBK87rutEfE6aSw93GNF6EMZk8L6nppmxorLNzYZ`. |
 
 Never commit `.env.local`.
 

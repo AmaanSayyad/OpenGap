@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
 import {
   ANSEMHACK_URL,
+  BUSINESS,
   ROADMAP,
   STOCK_POOL,
   TOKEN_MINT,
@@ -17,6 +18,7 @@ import {
   TOKEN_URL,
   TOKEN_UTILITY,
 } from "@/lib/company";
+import { PLATFORM_FEE_WALLET } from "@/lib/constants";
 import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
 import type { MeteoraPool } from "@/lib/types";
@@ -456,6 +458,24 @@ export function LaunchDesk() {
         </div>
       ) : null}
 
+      <Panel>
+        <Eyebrow>Revenue</Eyebrow>
+        <p className="mt-2 text-lg font-semibold tracking-tight">1% on every fill</p>
+        <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
+          {BUSINESS.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+        <a
+          href={`https://solscan.io/account/${PLATFORM_FEE_WALLET}`}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex h-8 items-center rounded-full bg-muted px-3 font-mono text-sm"
+        >
+          {shortAddress(PLATFORM_FEE_WALLET, 6)}
+        </a>
+      </Panel>
+
       <Panel data-tour="launch-quote" className="bg-card/40">
         <Eyebrow>Token · ${TOKEN_SYMBOL}</Eyebrow>
         <p className="mt-2 text-lg font-semibold tracking-tight">Live on ClawPump</p>
@@ -464,8 +484,9 @@ export function LaunchDesk() {
           <a href="https://x.com/Open_Gap" className="underline underline-offset-4" target="_blank" rel="noreferrer">
             @Open_Gap
           </a>
-          . Entry ticket for AnsemHack. Creator fees stay with the project. The
-          agent will not mint a second coin.
+          . Entry ticket for AnsemHack. The desk takes 1% on every Jupiter fill.
+          $OPENGAP creator fees stay with the project. The agent will not mint a
+          second coin.
         </p>
         <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
           {TOKEN_UTILITY.map((line) => (

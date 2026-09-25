@@ -1,3 +1,5 @@
+import { PLATFORM_FEE_BPS, PLATFORM_FEE_WALLET } from "@/lib/constants";
+
 export const TOKEN_MINT = "Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD";
 export const TOKEN_SYMBOL = "OPENGAP";
 export const TOKEN_NAME = "OpenGap";
@@ -41,14 +43,20 @@ export const TEAM = [
 
 export const TOKEN_UTILITY = [
   "AnsemHack entry ticket — the live ClawPump token judges can verify against @Open_Gap.",
-  "Creator fees from $OPENGAP stay with the project. The desk is the product; the token is not equity.",
+  "Desk revenue is the 1% Jupiter platform fee on every buy and sell. $OPENGAP creator fees stay with the project. The token is not equity.",
   "The agent never mints again. A human already launched this mint on purpose.",
 ] as const;
 
+export const BUSINESS = [
+  `Every Jupiter buy and sell on the desk takes ${PLATFORM_FEE_BPS / 100}% — shown on the ticket, already netted in the quote.`,
+  `Fees collect in USDC or SOL at ${PLATFORM_FEE_WALLET}.`,
+  "$OPENGAP creator fees stay with the project. The token is membership, not a second swap tax and not equity.",
+] as const;
+
 export const ROADMAP = [
+  "1% platform fee is live on every Jupiter fill. Keep it disclosed.",
   "Funded agent buys −3% PreStock / Tessera lots on Jupiter and posts the signature.",
   "More issuer names as they list. Tighter inventory and a kill-switch on the skill.",
-  "Token stays the fee-share / membership line — not a second product, not a US stock.",
 ] as const;
 
 export const MARKET = [
@@ -60,5 +68,5 @@ export const MARKET = [
 export const GTM = [
   "Judges: live tape at opengap.xyz, public agent, this mint on ClawPump.",
   "Distribution: @Open_Gap, Telegram, and the deepest green name on the tape.",
-  "Users: Phantom in, one Jupiter lot, fill in History. Not a US brokerage.",
+  "Users: Phantom in, one Jupiter lot, 1% platform fee, fill in History. Not a US brokerage.",
 ] as const;
