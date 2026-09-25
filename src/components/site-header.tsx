@@ -38,6 +38,12 @@ export function SiteHeader({
           >
             Portfolio
           </Link>
+          <Link
+            href="/stake"
+            className="inline-flex h-8 items-center rounded-full px-2 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-3"
+          >
+            Stake
+          </Link>
           <button
             type="button"
             onClick={tour.start}

@@ -4,8 +4,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
-import { BRAND, GITHUB_URL, SITE_URL, TAGLINE, TELEGRAM_URL, X_URL } from "@/lib/brand";
-import { POOL_URL, TOKEN_URL } from "@/lib/company";
+import { BRAND, DISCORD_URL, GITHUB_URL, SITE_URL, TAGLINE, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import { POOL_URL, TOKEN_DEXSCREENER } from "@/lib/company";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     github: GITHUB_URL,
     twitter: X_URL,
     telegram: TELEGRAM_URL,
-    token: TOKEN_URL,
+    discord: DISCORD_URL,
+    token: TOKEN_DEXSCREENER,
     pool: POOL_URL,
   },
   icons: {

@@ -41,6 +41,9 @@ export function isMeteora(hop: RouteHop) {
 }
 
 export function poolHref(dex: string, pairAddress: string) {
+  if (/pumpswap|pumpfun|pump\.fun/i.test(dex)) {
+    return `https://dexscreener.com/solana/${pairAddress}`;
+  }
   if (/dlmm/i.test(dex)) return meteoraPoolUrl(pairAddress, "dlmm");
   if (/dbc|dynamic/i.test(dex)) return meteoraPoolUrl(pairAddress, "dbc");
   if (/damm\s*v1|legacy/i.test(dex)) return meteoraPoolUrl(pairAddress, "dammv1");

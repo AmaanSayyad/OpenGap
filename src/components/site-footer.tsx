@@ -4,6 +4,7 @@ import {
   Bot,
   CandlestickChart,
   Layers,
+  Lock,
   Scale,
   ShoppingBasket,
   Wallet,
@@ -23,6 +24,7 @@ const DESK_ICONS = {
 
 const PRODUCT_ICONS: Record<string, LucideIcon> = {
   Portfolio: Wallet,
+  Stake: Lock,
   Guide: BookOpen,
   "Buy all": ShoppingBasket,
 };

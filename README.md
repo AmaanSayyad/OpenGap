@@ -9,14 +9,17 @@
 | App | [https://opengap.xyz](https://opengap.xyz) |
 | CA | `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` |
 | Token | [https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
-| DexScreener | [https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
-| Pool | [https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB) |
+| DexScreener | [https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) — paid by a community member |
+| PumpSwap | [https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn) |
+| pump.fun | [https://pump.fun/coin/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://pump.fun/coin/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
+| Stock pool | [https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB) |
 | Solscan | [https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
 | X | [https://x.com/Open_Gap](https://x.com/Open_Gap) |
 | Telegram | [https://t.me/OpenGapp](https://t.me/OpenGapp) |
+| Discord | [https://discord.gg/5qHH5T2EnU](https://discord.gg/5qHH5T2EnU) |
 | GitHub | [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap) |
 
-Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** is live on ClawPump. The agent does not mint another.
+Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** launched on ClawPump and graduated to PumpSwap. The agent does not mint another.
 
 Not for US persons. Not advice.
 
@@ -70,7 +73,7 @@ One site, four desks, one rule: **green is cheaper than the mark.**
 | PreStocks | `/` | Private-company tape. Jupiter vs PreStocks mark. Buy / sell in USDC or SOL. |
 | Tessera | `/?desk=tessera` | T-tokens. Same buy flow. Different claim. |
 | Listed stocks | `/?desk=basis` | Yahoo cash vs xStock tape. Evidence only. |
-| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP is live. Stock-paired Meteora DAMM v2: [OPENGAP/SPACEX](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). |
+| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP graduated to [PumpSwap OPENGAP/SOL](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). Stock-paired Meteora DAMM v2: [OPENGAP/SPACEX](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). |
 
 Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from the header. Portfolio is local fills plus live wallet lots.
 
@@ -190,7 +193,7 @@ sequenceDiagram
 
 Hops on the Jupiter route. DBC is venue evidence. Not a second buy button.
 
-Stock-paired pool: [OPENGAP/SPACEX DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
+Primary $OPENGAP pool is [OPENGAP/SOL on PumpSwap](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). Stock-paired pool: [OPENGAP/SPACEX DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
 
 ```mermaid
 sequenceDiagram
@@ -256,7 +259,7 @@ sequenceDiagram
 
 ### ClawPump
 
-Launch desk. Custom skill. Buy the discount. $OPENGAP is live — never mint again.
+Launch desk. Custom skill. Buy the discount. $OPENGAP graduated to PumpSwap — never mint again.
 
 ```mermaid
 sequenceDiagram
@@ -276,7 +279,7 @@ sequenceDiagram
   else
     Claw-->>App: HOLD
   end
-  Note over Claw: No second memecoin. OPENGAP/SPACEX is https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB
+  Note over Claw: No second memecoin. Graduated to PumpSwap OPENGAP/SOL. OPENGAP/SPACEX stays on Meteora DAMM v2.
 ```
 
 ### Solana
@@ -354,7 +357,7 @@ The desk charges **1% on every Jupiter buy and sell**. The quote is already net 
 
 Other lines:
 
-1. **$OPENGAP** — live on ClawPump. Creator fees stay with the project. Membership / fee-share, not equity, not a second take on the swap. The agent will not mint another.
+1. **$OPENGAP** — launched on ClawPump, now graduated to PumpSwap. Creator fees stay with the project. Membership / fee-share, not equity, not a second take on the swap. The agent will not mint another.
 2. **Agent inventory** — people can fund the OpenGap trading wallet so the bot keeps buying −3% lots. That is inventory, not another cut.
 3. **Alerts / pro tape** — gap webhooks, CSV, basket limits. Paid only if someone asks.
 
@@ -374,7 +377,7 @@ Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints aw
 
 ## Token
 
-**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
+**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Graduated to [OPENGAP/SOL on PumpSwap](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) paid by a community member. Stock-paired pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). Room: [Discord](https://discord.gg/5qHH5T2EnU).
 
 Utility: AnsemHack entry ticket and $OPENGAP creator-fee share. Desk revenue is the 1% Jupiter platform fee. Not equity. Not the product. The agent will not mint a second coin.
 
@@ -383,8 +386,8 @@ Long-term: the desk stays the company. Volume on the tape is the fee line. The t
 ## Go-to-market
 
 1. Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + live token).
-2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
-3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap) and [Telegram](https://t.me/OpenGapp). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name.
+2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP on DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
+3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap), [Telegram](https://t.me/OpenGapp), and [Discord](https://discord.gg/5qHH5T2EnU). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name. A community member paid for [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD).
 4. **Wallet users** — Phantom in, one $25 Jupiter lot, 1% platform fee, fill stays in History.
 5. **Do not** pretend this is a US stock app. Legal line stays in the footer.
 
@@ -396,7 +399,7 @@ Traction: live mainnet desk, public agent, funded trading wallet, token live. We
 
 - 1% platform fee is live on Jupiter buys and sells
 - Fund the agent wallet with USDC so HOLD is not the only decision
-- $OPENGAP is live; do not mint a second token
+- $OPENGAP graduated to PumpSwap; do not mint a second token
 - Tighter inventory and kill-switch on the skill
 - More PreStocks names as they list
 - Server-side fill archive (optional, opt-in) — today history is local

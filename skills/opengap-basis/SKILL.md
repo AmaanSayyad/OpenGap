@@ -15,7 +15,10 @@ Product: https://opengap.xyz
 Source: https://github.com/AmaanSayyad/OpenGap
 X: https://x.com/Open_Gap
 Telegram: https://t.me/OpenGapp
-Pool: https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB
+Discord: https://discord.gg/5qHH5T2EnU
+DexScreener: https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD (paid by a community member)
+PumpSwap: https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn
+Stock pool: https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB
 
 ## Signal
 
@@ -51,7 +54,7 @@ If no name is ≤ −3%, or Jupiter disagrees, or the wallet is dry: **hold**. L
 
 ## Never
 
-- Launch, mint, or tokenize anything new. $OPENGAP is already live (Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD). No second `/launch`, no pump.fun create, no Pons, no Uniswap create
+- Launch, mint, or tokenize anything new. $OPENGAP already graduated to PumpSwap (Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD). No second `/launch`, no pump.fun create, no Pons, no Uniswap create
 - Transfer off the agent wallet except the Jupiter buy of the named mint
 - Trade perps, sniper, memecoins, or names that are rich to mark
 - Post to social

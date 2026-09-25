@@ -3,15 +3,19 @@
 import Link from "next/link";
 import { TokenLogo } from "@/components/token-logo";
 import { Eyebrow, Panel } from "@/components/ui-kit";
+import { useStakes } from "@/hooks/use-stakes";
 import { useWalletBook } from "@/hooks/use-wallet-book";
 import { formatUsd, shortAddress } from "@/lib/format";
 
 export function HoldingsBook({ refresh = 0 }: { refresh?: number }) {
   const { book, error, connectedOwner } = useWalletBook(refresh);
+  const { totals } = useStakes();
   const tokens = book?.positions.filter((row) => row.issuer !== "cash") ?? [];
   const solValue = book?.solValue ?? 0;
   const total =
-    (book?.usdc ?? 0) + solValue + tokens.reduce((sum, row) => sum + row.tapeValue, 0);
+    (book?.usdc ?? 0) +
+    solValue +
+    tokens.reduce((sum, row) => sum + row.tapeValue, 0);
 
   return (
     <Panel className="flex flex-col gap-4">
@@ -27,12 +31,20 @@ export function HoldingsBook({ refresh = 0 }: { refresh?: number }) {
             be called Book.
           </p>
         </div>
-        <Link
-          href="/portfolio"
-          className="text-xs underline underline-offset-4 text-muted-foreground hover:text-foreground"
-        >
-          Full portfolio
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            href="/stake"
+            className="text-xs underline underline-offset-4 text-muted-foreground hover:text-foreground"
+          >
+            Stake
+          </Link>
+          <Link
+            href="/portfolio"
+            className="text-xs underline underline-offset-4 text-muted-foreground hover:text-foreground"
+          >
+            Full portfolio
+          </Link>
+        </div>
       </div>
 
       {error ? (
@@ -56,8 +68,20 @@ export function HoldingsBook({ refresh = 0 }: { refresh?: number }) {
           </div>
           <p className="font-mono text-sm">
             {formatUsd(total)}
-            <span className="ml-2 text-xs text-muted-foreground">tokens + cash</span>
+            <span className="ml-2 text-xs text-muted-foreground">
+              tokens + cash
+              {totals.locked > 0 ? " + locked" : ""}
+            </span>
           </p>
+          {totals.locked > 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Locked {totals.locked.toLocaleString("en-US", { maximumFractionDigits: 1 })}{" "}
+              $OPENGAP
+              <Link href="/stake" className="ml-2 underline underline-offset-4">
+                View
+              </Link>
+            </p>
+          ) : null}
           {tokens.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               No tokenized names yet. A buy lands here until you sell.

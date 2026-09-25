@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FillHistory } from "@/components/fill-history";
+import { StakeLocks } from "@/components/stake-locks";
+import { useStakes } from "@/hooks/use-stakes";
+import { useOpenGapPrice } from "@/hooks/use-opengap-price";
 import { SiteHeader } from "@/components/site-header";
 import { TokenLogo } from "@/components/token-logo";
 import { Button } from "@/components/ui/button";
@@ -10,6 +13,7 @@ import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
 import { useLastFill } from "@/hooks/use-last-fill";
 import { useWalletBook } from "@/hooks/use-wallet-book";
 import { formatPct, formatSignedUsd, formatUsd, shortAddress } from "@/lib/format";
+import { formatUnlockAt } from "@/lib/staking";
 import { averageCost, realizedPnl } from "@/lib/pnl";
 import type { TapeRow } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -17,6 +21,9 @@ import { cn } from "@/lib/utils";
 export function PortfolioView() {
   const { book, error, connectedOwner } = useWalletBook();
   const { fills } = useLastFill();
+  const { totals, stakes } = useStakes();
+  const openGapPrice = useOpenGapPrice();
+  const lockedUsd = openGapPrice ? totals.locked * openGapPrice : 0;
   const [desk, setDesk] = useState<TapeRow[]>([]);
   const tokens = book?.positions.filter((row) => row.issuer !== "cash") ?? [];
   const tokenTape = tokens.reduce((sum, row) => sum + row.tapeValue, 0);
@@ -25,7 +32,7 @@ export function PortfolioView() {
   const solPrice = book?.solPrice ?? 0;
   const solValue = book?.solValue ?? (book ? book.sol * solPrice : 0);
   const realized = realizedPnl(fills);
-  const total = cash + tokenTape + solValue;
+  const total = cash + tokenTape + solValue + lockedUsd;
 
   useEffect(() => {
     let cancelled = false;
@@ -70,7 +77,7 @@ export function PortfolioView() {
             </p>
           </div>
           <div className="text-left sm:text-right">
-            <p className="text-xs text-muted-foreground">SOL + USDC + names</p>
+            <p className="text-xs text-muted-foreground">SOL + USDC + names + locked</p>
             <p className="mt-1 font-mono text-3xl tracking-tight">
               {book ? formatUsd(total) : "…"}
             </p>
@@ -84,7 +91,7 @@ export function PortfolioView() {
 
         {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <CashStat
             symbol="SOL"
             label="Solana"
@@ -102,6 +109,19 @@ export function PortfolioView() {
             label="Holdings tape"
             value={book ? formatUsd(tokenTape) : "…"}
             stacked={(tokens.length ? tokens : desk).slice(0, 4)}
+          />
+          <CashStat
+            symbol="OPENGAP"
+            image="/opengap.png"
+            label="Locked $OPENGAP"
+            value={totals.locked ? formatAmtLocked(totals.locked) : "—"}
+            hint={
+              totals.locked
+                ? `${lockedUsd ? `${formatUsd(lockedUsd)} · ` : ""}${totals.count} lock${totals.count === 1 ? "" : "s"}${
+                    stakes[0] ? ` · unlock ${formatUnlockAt(Math.min(...stakes.map((row) => row.unlockAt)))}` : ""
+                  }`
+                : "Stake to lock"
+            }
           />
           <Panel className="flex items-center gap-3">
             <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-muted/80 ring-1 ring-border/70">
@@ -239,6 +259,7 @@ export function PortfolioView() {
           </Panel>
 
           <div className="flex flex-col gap-8">
+            <StakeLocks compact />
             <FillHistory fills={fills} variant="page" />
             {cheap.length ? (
               <Panel className="flex flex-col gap-4">
@@ -275,6 +296,11 @@ export function PortfolioView() {
       </main>
     </div>
   );
+}
+
+function formatAmtLocked(value: number) {
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(2)}M`;
+  return value.toLocaleString("en-US", { maximumFractionDigits: 1 });
 }
 
 function CashStat({

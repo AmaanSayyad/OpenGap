@@ -10,14 +10,18 @@ import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
 import {
   ANSEMHACK_URL,
   BUSINESS,
+  PUMP_POOL,
   ROADMAP,
   STOCK_POOL,
+  TOKEN_DEXSCREENER,
   TOKEN_MINT,
+  TOKEN_PUMP,
   TOKEN_SOLSCAN,
   TOKEN_SYMBOL,
   TOKEN_URL,
   TOKEN_UTILITY,
 } from "@/lib/company";
+import { DISCORD_URL } from "@/lib/brand";
 import { PLATFORM_FEE_WALLET } from "@/lib/constants";
 import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
@@ -195,7 +199,7 @@ export function LaunchDesk() {
             and can buy a $5 lot when the live Jupiter price is at least 3%
             cheaper than the issuer mark. Tape is what you pay. Mark is not a
             quote you can lift. Green means cheaper — that gap is the trade.
-            $OPENGAP is live on ClawPump. The agent will not mint another.
+            $OPENGAP graduated to PumpSwap. The agent will not mint another.
           </p>
           <TourHint className="mt-4" />
         </div>
@@ -364,7 +368,7 @@ export function LaunchDesk() {
               </a>
             ) : null}
             <a
-              href={TOKEN_URL}
+              href={TOKEN_DEXSCREENER}
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-8 items-center rounded-full px-3 text-sm text-muted-foreground underline-offset-4 hover:underline"
@@ -478,15 +482,18 @@ export function LaunchDesk() {
 
       <Panel data-tour="launch-quote" className="bg-card/40">
         <Eyebrow>Token · ${TOKEN_SYMBOL}</Eyebrow>
-        <p className="mt-2 text-lg font-semibold tracking-tight">Live on ClawPump</p>
+        <p className="mt-2 text-lg font-semibold tracking-tight">
+          Graduated to PumpSwap
+        </p>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          Mint {shortAddress(TOKEN_MINT, 6)}. Launched 24 Sep 2026 against{" "}
+          Mint {shortAddress(TOKEN_MINT, 6)}. Launched 24 Sep 2026 on ClawPump
+          against{" "}
           <a href="https://x.com/Open_Gap" className="underline underline-offset-4" target="_blank" rel="noreferrer">
             @Open_Gap
           </a>
-          . Entry ticket for AnsemHack. The desk takes 1% on every Jupiter fill.
-          $OPENGAP creator fees stay with the project. The agent will not mint a
-          second coin.
+          , then migrated to {PUMP_POOL.name}. Entry ticket for AnsemHack. The
+          desk takes 1% on every Jupiter fill. $OPENGAP creator fees stay with
+          the project. The agent will not mint a second coin.
         </p>
         <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
           {TOKEN_UTILITY.map((line) => (
@@ -495,10 +502,26 @@ export function LaunchDesk() {
         </ul>
         <div className="mt-4 flex flex-wrap gap-2">
           <a
-            href={TOKEN_URL}
+            href={TOKEN_DEXSCREENER}
             target="_blank"
             rel="noreferrer"
             className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
+          >
+            DexScreener
+          </a>
+          <a
+            href={TOKEN_PUMP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            Pump.fun
+          </a>
+          <a
+            href={TOKEN_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
           >
             ClawPump
           </a>
@@ -518,6 +541,14 @@ export function LaunchDesk() {
           >
             AnsemHack
           </a>
+          <a
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            Discord
+          </a>
         </div>
         <p className="mt-6 text-xs font-medium text-muted-foreground">Roadmap</p>
         <ul className="mt-2 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
@@ -528,11 +559,36 @@ export function LaunchDesk() {
       </Panel>
 
       <Panel>
+        <Eyebrow>PumpSwap pool</Eyebrow>
+        <p className="mt-2 text-lg font-semibold tracking-tight">{PUMP_POOL.name}</p>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          {PUMP_POOL.note}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={PUMP_POOL.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
+          >
+            DexScreener
+          </a>
+          <a
+            href={TOKEN_PUMP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            Pump.fun
+          </a>
+        </div>
+      </Panel>
+
+      <Panel>
         <Eyebrow>Stock-paired Meteora pool</Eyebrow>
         <p className="mt-2 text-lg font-semibold tracking-tight">{STOCK_POOL.name}</p>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          {STOCK_POOL.note} Quote is the PreStock, not SOL. $OPENGAP stays the
-          ClawPump coin.
+          {STOCK_POOL.note} Quote is the PreStock, not SOL.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <a

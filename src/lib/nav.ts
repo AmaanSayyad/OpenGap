@@ -1,5 +1,5 @@
-import { GITHUB_URL, SITE_URL, TELEGRAM_URL, X_URL } from "@/lib/brand";
-import { POOL_URL, TOKEN_URL } from "@/lib/company";
+import { DISCORD_URL, GITHUB_URL, SITE_URL, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import { POOL_URL, STOCK_POOL, TOKEN_DEXSCREENER } from "@/lib/company";
 import type { Desk } from "@/lib/tour";
 
 export const DESK_LINKS: Array<{
@@ -17,18 +17,20 @@ export const DESK_LINKS: Array<{
 export const FOOTER_LINKS = {
   product: [
     { label: "Portfolio", href: "/portfolio" },
+    { label: "Stake", href: "/stake" },
     { label: "Guide", href: "/?tour=1" },
     { label: "Buy all", href: "/?desk=prestocks" },
     { label: "Live", href: SITE_URL, logo: "/opengap.png" },
     { label: "GitHub", href: GITHUB_URL, logo: "/logos/github.svg" },
     { label: "X", href: X_URL, logo: "/logos/x.svg" },
     { label: "Telegram", href: TELEGRAM_URL, logo: "/logos/telegram.svg" },
-    { label: "$OPENGAP", href: TOKEN_URL, logo: "/opengap.png" },
-    { label: "Pool", href: POOL_URL, logo: "/logos/meteora-mark.png" },
+    { label: "Discord", href: DISCORD_URL, logo: "/logos/discord.svg" },
+    { label: "$OPENGAP", href: TOKEN_DEXSCREENER, logo: "/opengap.png" },
+    { label: "Pool", href: POOL_URL, logo: "/opengap.png" },
   ],
   venues: [
     { label: "Jupiter", href: "https://jup.ag", logo: "/logos/jupiter.png" },
-    { label: "Meteora", href: POOL_URL, logo: "/logos/meteora-mark.png" },
+    { label: "Meteora", href: STOCK_POOL.url, logo: "/logos/meteora-mark.png" },
     { label: "PreStocks", href: "https://prestocks.com", logo: "/logos/prestocks.png" },
     { label: "Tessera", href: "https://www.tessera.pe", logo: "/logos/tessera.png" },
     { label: "Solana", href: "https://solana.com", logo: "/logos/sol.png" },

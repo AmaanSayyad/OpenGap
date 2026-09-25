@@ -133,7 +133,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "launch-quote",
     title: "The OpenGap token",
-    body: "$OPENGAP is live on ClawPump. The stock-paired pool is OPENGAP/SPACEX on Meteora DAMM v2. The agent does not mint another.",
+    body: "$OPENGAP graduated to PumpSwap (OPENGAP/SOL). The stock-paired pool is still OPENGAP/SPACEX on Meteora. The agent does not mint another.",
     target: "launch-quote",
     desk: "launch",
   },
@@ -166,5 +166,12 @@ export const TOUR_STEPS: TourStep[] = [
     body: "The portfolio page — cash, lots, history, and P&L. Book was the old name for this. Header Portfolio opens it anytime.",
     target: "portfolio-page",
     href: "/portfolio",
+  },
+  {
+    id: "stake",
+    title: "Lock $OPENGAP",
+    body: "Pick 30, 90, 180, or 360 days. APY matches the term. You send $OPENGAP to the staking address; the lock and reward show in Portfolio on this device.",
+    target: "stake",
+    href: "/stake",
   },
 ];
