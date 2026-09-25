@@ -1,4 +1,5 @@
 import { Connection, PublicKey } from "@solana/web3.js";
+import { getTokenUiAmount, sendConnection } from "@/lib/server-wallet";
 import {
   mergeStakes,
   sanitizeStake,
@@ -13,14 +14,36 @@ const MEMO = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr";
 const LIMIT = 80;
 
 const cache: StakeRecord[] = [];
+let vaultTotal: { amount: number; at: number } | null = null;
+const VAULT_TTL_MS = 15_000;
 
 export function rememberStake(row: StakeRecord) {
   const next = sanitizeStake(row);
   if (!next) return;
   const i = cache.findIndex((item) => item.signature === next.signature);
   if (i >= 0) cache[i] = next;
-  else cache.unshift(next);
+  else {
+    cache.unshift(next);
+    if (vaultTotal) {
+      vaultTotal = {
+        amount: vaultTotal.amount + next.amount,
+        at: Date.now(),
+      };
+    }
+  }
   if (cache.length > 200) cache.length = 200;
+}
+
+export async function readVaultTotal(connection: Connection) {
+  if (vaultTotal && Date.now() - vaultTotal.at < VAULT_TTL_MS) {
+    return vaultTotal.amount;
+  }
+  let amount = await getTokenUiAmount(STAKING_VAULT, STAKING_MINT, connection);
+  if (amount === 0) {
+    amount = await getTokenUiAmount(STAKING_VAULT, STAKING_MINT, sendConnection());
+  }
+  vaultTotal = { amount, at: Date.now() };
+  return amount;
 }
 
 export function cachedStakes() {

@@ -13,6 +13,7 @@ import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
 import { useOpenGapPrice } from "@/hooks/use-opengap-price";
 import { useStakes } from "@/hooks/use-stakes";
 import { formatTokenAmount, useTokenBalance } from "@/hooks/use-token-balance";
+import { useVaultStaked } from "@/hooks/use-vault-staked";
 import { TOKEN_DEXSCREENER, TOKEN_SYMBOL } from "@/lib/company";
 import { formatUsd, shortAddress } from "@/lib/format";
 import {
@@ -32,12 +33,13 @@ function formatAmt(value: number) {
   return value.toLocaleString("en-US", { maximumFractionDigits: 4 });
 }
 
-export function StakeView() {
+export function StakeView({ totalStaked = null }: { totalStaked?: number | null }) {
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected } = useWallet();
   const { setVisible } = useWalletModal();
   const { save } = useStakes();
   const price = useOpenGapPrice();
+  const vault = useVaultStaked(totalStaked);
   const held = useTokenBalance(connected ? STAKING_MINT : null, connected);
   const [days, setDays] = useState<StakeDays>(30);
   const [amount, setAmount] = useState("1000");
@@ -81,6 +83,7 @@ export function StakeView() {
         unlockAt: next.unlockAt,
       });
       toast.success(`Locked ${formatAmt(parsed)} $${TOKEN_SYMBOL}`);
+      void vault.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Stake failed");
     } finally {
@@ -100,6 +103,30 @@ export function StakeView() {
             {TOKEN_SYMBOL} from your wallet. You will automatically receive the
             principal + reward at the unlock time.
           </p>
+          <Panel className="mt-2 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <Eyebrow>Total staked</Eyebrow>
+              <p className="mt-2 font-mono text-3xl tracking-tight sm:text-4xl">
+                {vault.amount == null ? "…" : formatAmt(vault.amount)}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                ${TOKEN_SYMBOL} locked by everyone
+                {price && vault.amount != null ? (
+                  <span className="ml-2 font-mono">
+                    {formatUsd(vault.amount * price)}
+                  </span>
+                ) : null}
+              </p>
+            </div>
+            <a
+              href={`https://solscan.io/account/${STAKING_VAULT}`}
+              target="_blank"
+              rel="noreferrer"
+              className="font-mono text-xs text-muted-foreground underline underline-offset-4"
+            >
+              {shortAddress(STAKING_VAULT, 4)}
+            </a>
+          </Panel>
         </section>
 
         <section className="grid min-w-0 gap-2 sm:grid-cols-2 lg:grid-cols-4">
