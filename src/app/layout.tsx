@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
 import { BRAND, GITHUB_URL, SITE_URL, TAGLINE, TELEGRAM_URL, X_URL } from "@/lib/brand";
-import { TOKEN_URL } from "@/lib/company";
+import { POOL_URL, TOKEN_URL } from "@/lib/company";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     twitter: X_URL,
     telegram: TELEGRAM_URL,
     token: TOKEN_URL,
+    pool: POOL_URL,
   },
   icons: {
     icon: [

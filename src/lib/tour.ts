@@ -133,7 +133,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "launch-quote",
     title: "The OpenGap token",
-    body: "$OPENGAP is live on ClawPump. It is the AnsemHack entry ticket and fee share. The agent does not mint another.",
+    body: "$OPENGAP is live on ClawPump. The stock-paired pool is OPENGAP/SPACEX on Meteora DAMM v2. The agent does not mint another.",
     target: "launch-quote",
     desk: "launch",
   },

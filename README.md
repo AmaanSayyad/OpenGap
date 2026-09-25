@@ -70,7 +70,7 @@ One site, four desks, one rule: **green is cheaper than the mark.**
 | PreStocks | `/` | Private-company tape. Jupiter vs PreStocks mark. Buy / sell in USDC or SOL. |
 | Tessera | `/?desk=tessera` | T-tokens. Same buy flow. Different claim. |
 | Listed stocks | `/?desk=basis` | Yahoo cash vs xStock tape. Evidence only. |
-| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP is live. Stock-paired Meteora DAMM: OPENGAP/SPACEX. |
+| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP is live. Stock-paired Meteora DAMM v2: [OPENGAP/SPACEX](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). |
 
 Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from the header. Portfolio is local fills plus live wallet lots.
 
@@ -190,6 +190,8 @@ sequenceDiagram
 
 Hops on the Jupiter route. DBC is venue evidence. Not a second buy button.
 
+Stock-paired pool: [OPENGAP/SPACEX DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
+
 ```mermaid
 sequenceDiagram
   actor Trader
@@ -274,7 +276,7 @@ sequenceDiagram
   else
     Claw-->>App: HOLD
   end
-  Note over Claw: No second memecoin. OPENGAP/SPACEX is a Meteora DAMM pool.
+  Note over Claw: No second memecoin. OPENGAP/SPACEX is https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB
 ```
 
 ### Solana
@@ -372,7 +374,7 @@ Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints aw
 
 ## Token
 
-**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap).
+**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB).
 
 Utility: AnsemHack entry ticket and creator-fee share. Not equity. Not the product. The agent will not mint a second coin.
 

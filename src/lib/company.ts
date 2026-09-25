@@ -18,6 +18,8 @@ export const STOCK_POOL = {
   note: "Stock-paired Meteora DAMM for the Stocklana ClawPump bounty. Not a second memecoin.",
 } as const;
 
+export const POOL_URL = STOCK_POOL.url;
+
 export const FOUNDER = {
   name: "Amaan Sayyad",
   role: "CEO",
