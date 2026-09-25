@@ -73,7 +73,7 @@ export function Segmented<T extends string>({
   options: Array<{ id: T; label: string; icon?: ReactNode }>;
 }) {
   return (
-    <div className="inline-flex flex-wrap gap-1 rounded-full border border-border/80 bg-muted/40 p-1">
+    <div className="inline-flex max-w-full flex-wrap gap-1 rounded-full border border-border/80 bg-muted/40 p-1">
       {options.map((option) => (
         <button
           key={option.id}

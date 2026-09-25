@@ -123,7 +123,7 @@ export function TradeRail({
       ) : null}
 
       {row ? (
-        <Button className="self-start" onClick={() => onBuy(row)}>
+        <Button className="w-full sm:w-auto sm:self-start" onClick={() => onBuy(row)}>
           Buy {row.symbol}
         </Button>
       ) : null}

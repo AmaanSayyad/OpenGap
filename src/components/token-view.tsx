@@ -75,7 +75,7 @@ export function TokenView({ symbol }: { symbol: string }) {
   return (
     <div className="flex flex-1 flex-col">
       <SiteHeader />
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-5 py-14 sm:gap-14 sm:px-6 sm:py-16">
+      <main className="mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col gap-10 px-4 py-10 sm:gap-14 sm:px-6 sm:py-16">
         {error ? (
           <p className="text-sm text-destructive">{error}</p>
         ) : !row ? (
@@ -94,10 +94,11 @@ export function TokenView({ symbol }: { symbol: string }) {
                 <p className="mt-3 font-mono text-sm text-muted-foreground">{row.symbol}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
                 <Button
                   size="lg"
                   variant="outline"
+                  className="w-full sm:w-auto"
                   onClick={() => {
                     setSide("sell");
                     setOpen(true);
@@ -107,6 +108,7 @@ export function TokenView({ symbol }: { symbol: string }) {
                 </Button>
                 <Button
                   size="lg"
+                  className="w-full sm:w-auto"
                   onClick={() => {
                     setSide("buy");
                     setOpen(true);

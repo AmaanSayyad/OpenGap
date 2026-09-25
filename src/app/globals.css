@@ -129,10 +129,10 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply font-sans;
+    @apply font-sans overflow-x-clip;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-clip;
     font-variant-ligatures: none;
   }
   h1,
@@ -156,6 +156,15 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   font-family: var(--font-sans);
+  max-width: min(28rem, calc(100vw - 2rem));
+}
+
+.sheet-body {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .wallet-adapter-modal-title,

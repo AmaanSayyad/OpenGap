@@ -4,11 +4,17 @@
 
 **Buy tokenized stocks when the live price on Jupiter is cheaper than the official reference price from the issuer (PreStocks, or Yahoo on listed names).**
 
-**Live:** [https://opengap.xyz](https://opengap.xyz)  
-**Source:** [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap)  
-**X:** [https://x.com/Open_Gap](https://x.com/Open_Gap)  
-**Telegram:** [https://t.me/OpenGapp](https://t.me/OpenGapp)  
-**Token:** [https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD)
+| Link | URL |
+| --- | --- |
+| App | [https://opengap.xyz](https://opengap.xyz) |
+| CA | `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` |
+| Token | [https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
+| DexScreener | [https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
+| Pool | [https://app.meteora.ag/pools/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB](https://app.meteora.ag/pools/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB) |
+| Solscan | [https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
+| X | [https://x.com/Open_Gap](https://x.com/Open_Gap) |
+| Telegram | [https://t.me/OpenGapp](https://t.me/OpenGapp) |
+| GitHub | [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap) |
 
 Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** is live on ClawPump. The agent does not mint another.
 
@@ -403,11 +409,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Local: [http://localhost:3000](http://localhost:3000).  
-Live: [https://opengap.xyz](https://opengap.xyz).  
-Source: [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap).  
-X: [https://x.com/Open_Gap](https://x.com/Open_Gap).  
-Telegram: [https://t.me/OpenGapp](https://t.me/OpenGapp).
+Local: [http://localhost:3000](http://localhost:3000). Live links are in the table at the top.
 
 | Variable | Where | Notes |
 | --- | --- | --- |

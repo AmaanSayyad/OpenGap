@@ -15,7 +15,7 @@ export function HoldingsBook({ refresh = 0 }: { refresh?: number }) {
 
   return (
     <Panel className="flex flex-col gap-4">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:gap-3">
         <div>
           <Eyebrow>Portfolio</Eyebrow>
           <p className="mt-1 text-sm text-muted-foreground">

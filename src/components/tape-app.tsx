@@ -279,7 +279,7 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
 
       <main
         className={cn(
-          "mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 sm:px-6",
+          "mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col px-4 sm:px-6",
           desk === "launch"
             ? "gap-8 py-8 sm:gap-10 sm:py-10"
             : "gap-12 py-12 sm:gap-14 sm:py-16",
@@ -302,10 +302,10 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
             </p>
           </div>
           {cheap ? (
-            <Panel data-tour="discount" className="flex w-full items-center justify-between gap-6 px-6 py-5">
-              <div className="flex items-start gap-3">
+            <Panel data-tour="discount" className="flex w-full flex-col items-stretch gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6">
+              <div className="flex min-w-0 items-start gap-3">
                 <TokenLogo symbol={cheap.symbol} image={cheap.image} size="lg" className="mt-1" />
-                <div>
+                <div className="min-w-0">
                 <Eyebrow>Deepest discount</Eyebrow>
                 <p className="mt-2 text-lg font-semibold tracking-tight">{cheap.name}</p>
                 <p className="mt-1 font-mono text-sm text-gain">
@@ -313,7 +313,9 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
                 </p>
                 </div>
               </div>
-              <Button onClick={() => setBuyRow(cheap)}>Buy {cheap.symbol}</Button>
+              <Button className="w-full shrink-0 sm:w-auto" onClick={() => setBuyRow(cheap)}>
+                Buy {cheap.symbol}
+              </Button>
             </Panel>
           ) : (
             <Skeleton className="h-24 rounded-2xl" />
@@ -410,7 +412,7 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search SpaceX, OpenAI…"
-                  className="w-48"
+                  className="w-full min-w-0 sm:w-48"
                 />
                 <Button variant="outline" size="sm" onClick={() => setBasketOpen(true)}>
                   Buy every name
@@ -533,7 +535,7 @@ export function TapeApp({ initial }: { initial?: TapeResponse }) {
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
                     placeholder="Search T-OpenAI…"
-                    className="w-48"
+                    className="w-full min-w-0 sm:w-48"
                   />
                   <Button
                     variant="ghost"

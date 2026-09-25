@@ -14,7 +14,7 @@ const DESK_ICONS = {
 export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border/60 bg-background">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-5 py-10 sm:px-6">
+      <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center gap-2.5">
@@ -93,7 +93,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/60">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-5 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-2 px-4 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p className="inline-flex items-center gap-2">
             © 2026 {BRAND}
             <span aria-hidden>·</span>

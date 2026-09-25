@@ -9,6 +9,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
@@ -75,7 +76,7 @@ export function BasketSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-md">
+      <SheetContent className="w-full gap-0 p-0 sm:max-w-md">
         <SheetHeader>
           <SheetTitle className="text-2xl font-semibold tracking-tight">
             Buy every name
@@ -86,7 +87,7 @@ export function BasketSheet({
           </SheetDescription>
         </SheetHeader>
 
-        <div className="mt-2 flex flex-col gap-6 px-4 pb-8">
+        <div className="sheet-body flex flex-col gap-6 px-4 py-2">
           <ol className="flex flex-wrap gap-1.5 text-xs">
             {["Gap", "Size", "Names", "Sign"].map((label, index) => (
               <li
@@ -147,10 +148,12 @@ export function BasketSheet({
             ))}
           </ol>
 
+        </div>
+        <SheetFooter>
           <Button size="lg" disabled={buying || rows.length === 0} onClick={buyBasket}>
             {progress ?? (connected ? "Buy every name" : "Connect to buy")}
           </Button>
-        </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

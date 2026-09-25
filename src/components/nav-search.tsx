@@ -112,7 +112,7 @@ export function NavSearch({ rows }: { rows?: TapeRow[] }) {
   }
 
   return (
-    <div ref={boxRef} className="relative min-w-0 flex-1 max-w-xs">
+    <div ref={boxRef} className="relative min-w-0 flex-1 max-w-[9.5rem] sm:max-w-xs">
       <label className="relative block">
         <Search
           className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
@@ -128,7 +128,7 @@ export function NavSearch({ rows }: { rows?: TapeRow[] }) {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder="Search a name…"
+          placeholder="Search…"
           autoComplete="off"
           className="h-8 w-full rounded-full border border-input bg-background/80 pl-8 pr-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
         />
@@ -136,7 +136,7 @@ export function NavSearch({ rows }: { rows?: TapeRow[] }) {
       {open ? (
         <ul
           role="listbox"
-          className="absolute left-0 right-0 z-50 mt-1.5 overflow-hidden rounded-2xl border border-border bg-background py-1 shadow-lg"
+          className="absolute right-0 z-50 mt-1.5 max-h-[min(20rem,70dvh)] w-[min(20rem,calc(100vw-1.5rem))] overflow-y-auto overflow-x-hidden rounded-2xl border border-border bg-background py-1 shadow-lg"
         >
           {hits.length === 0 ? (
             <li className="px-3 py-2 text-sm text-muted-foreground">No matching name.</li>

@@ -55,7 +55,7 @@ export function PortfolioView() {
   return (
     <div className="flex flex-1 flex-col">
       <SiteHeader />
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-5 py-10 sm:gap-10 sm:px-6 sm:py-12">
+      <main className="mx-auto flex w-full min-w-0 max-w-6xl flex-1 flex-col gap-8 px-4 py-8 sm:gap-10 sm:px-6 sm:py-12">
         <div data-tour="portfolio-page" className="flex flex-col gap-8">
         <section className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>

@@ -10,6 +10,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
@@ -246,7 +247,7 @@ export function BuySheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-md">
+      <SheetContent className="w-full gap-0 p-0 sm:max-w-md">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-3 text-2xl font-semibold tracking-tight">
             <TokenLogo symbol={row.symbol} image={row.image} size="lg" />
@@ -259,7 +260,7 @@ export function BuySheet({
         </SheetHeader>
 
         {done ? (
-          <div className="mt-2 flex flex-col gap-5 px-4 pb-8">
+          <div className="sheet-body flex flex-col gap-5 px-4 py-2">
             <p className="text-sm">
               {done.side === "buy" ? "Bought" : "Sold"} {done.tokens.toFixed(5)}{" "}
               {done.symbol} for {done.paidLabel}.
@@ -285,10 +286,9 @@ export function BuySheet({
             >
               View on Solscan
             </a>
-            <Button onClick={() => onOpenChange(false)}>Done</Button>
           </div>
         ) : (
-        <div className="mt-2 flex flex-col gap-6 px-4 pb-8">
+        <div className="sheet-body flex flex-col gap-6 px-4 py-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <Segmented
               value={side}
@@ -440,29 +440,38 @@ export function BuySheet({
             ) : null}
           </div>
 
-          <Button
-            size="lg"
-            disabled={buying || (connected && !quote) || sellTooMuch}
-            onClick={() => {
-              if (!connected) setVisible(true);
-              else submit();
-            }}
-          >
-            {buying
-              ? "Signing…"
-              : connected
-                ? `${side === "buy" ? "Buy" : "Sell"} ${row.symbol}`
-                : "Connect wallet"}
-          </Button>
-
-          <p className="text-xs leading-5 text-muted-foreground">
-            {row.issuer === "tessera"
-              ? "Tessera T-tokens are loan participation, not equity."
-              : "PreStocks are economic exposure only."}{" "}
-            Not available to US persons. Not advice.
-          </p>
         </div>
         )}
+        <SheetFooter>
+          {done ? (
+            <Button size="lg" onClick={() => onOpenChange(false)}>
+              Done
+            </Button>
+          ) : (
+            <>
+              <Button
+                size="lg"
+                disabled={buying || (connected && !quote) || sellTooMuch}
+                onClick={() => {
+                  if (!connected) setVisible(true);
+                  else submit();
+                }}
+              >
+                {buying
+                  ? "Signing…"
+                  : connected
+                    ? `${side === "buy" ? "Buy" : "Sell"} ${row.symbol}`
+                    : "Connect wallet"}
+              </Button>
+              <p className="text-xs leading-5 text-muted-foreground">
+                {row.issuer === "tessera"
+                  ? "Tessera T-tokens are loan participation, not equity."
+                  : "PreStocks are economic exposure only."}{" "}
+                Not available to US persons. Not advice.
+              </p>
+            </>
+          )}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

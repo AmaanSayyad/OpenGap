@@ -19,27 +19,29 @@ export function SiteHeader({
   const tour = useTour();
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-3 px-4">
-        <Link href="/" className="flex shrink-0 items-center gap-3">
-          <BrandLogo size={40} priority />
-          <span className="text-lg font-semibold tracking-tight">{BRAND}</span>
+        <div className="mx-auto flex h-14 w-full max-w-6xl items-center gap-2 px-3 sm:h-16 sm:gap-3 sm:px-4">
+        <Link href="/" className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <BrandLogo size={40} className="size-9 sm:size-10" priority />
+          <span className="hidden text-lg font-semibold tracking-tight min-[380px]:inline">
+            {BRAND}
+          </span>
           <span className="hidden text-sm text-muted-foreground xl:block">
             {TAGLINE}
           </span>
         </Link>
         <NavSearch rows={ticker} />
-        <div className="flex shrink-0 items-center gap-1">
+        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
           <Link
             href="/portfolio"
             data-tour="portfolio"
-            className="h-8 rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground inline-flex items-center"
+            className="inline-flex h-8 items-center rounded-full px-2 text-sm text-muted-foreground transition-colors hover:text-foreground sm:px-3"
           >
             Portfolio
           </Link>
           <button
             type="button"
             onClick={tour.start}
-            className="h-8 rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="hidden h-8 rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground sm:inline-flex sm:items-center"
           >
             Guide
           </button>

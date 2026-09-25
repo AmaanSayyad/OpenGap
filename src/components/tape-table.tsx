@@ -168,6 +168,7 @@ export function TapeTable({
                   {onCompare ? (
                     <Button
                       size="xs"
+                      className="hidden sm:inline-flex"
                       variant={compared?.includes(row.symbol) ? "default" : "ghost"}
                       onClick={() => onCompare(row)}
                     >
@@ -177,6 +178,7 @@ export function TapeTable({
                   {onAlert ? (
                     <Button
                       size="xs"
+                      className="hidden md:inline-flex"
                       variant={alerted?.(row.symbol) ? "default" : "ghost"}
                       onClick={() => onAlert(row)}
                     >

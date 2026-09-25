@@ -267,14 +267,16 @@ export function ProductTour({
     : null;
 
   const placeBelow = hole ? hole.top + hole.height + 16 + CARD_H < window.innerHeight : true;
+  const cardW = Math.min(CARD_W, window.innerWidth - 32);
   const left = hole
-    ? Math.min(Math.max(16, hole.left), window.innerWidth - CARD_W - 16)
-    : Math.max(16, (window.innerWidth - CARD_W) / 2);
-  const top = hole
+    ? Math.min(Math.max(16, hole.left), Math.max(16, window.innerWidth - cardW - 16))
+    : Math.max(16, (window.innerWidth - cardW) / 2);
+  const rawTop = hole
     ? placeBelow
       ? hole.top + hole.height + 14
       : Math.max(16, hole.top - CARD_H - 14)
     : Math.max(24, (window.innerHeight - CARD_H) / 2);
+  const top = Math.min(rawTop, Math.max(16, window.innerHeight - CARD_H - 16));
 
   return (
     <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="tour-title">
