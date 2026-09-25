@@ -19,6 +19,7 @@
 | Discord | [https://discord.gg/5qHH5T2EnU](https://discord.gg/5qHH5T2EnU) |
 | GitHub | [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap) |
 | Pitch | [https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6) |
+| License | [MIT](LICENSE) |
 
 Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** launched on ClawPump and graduated to PumpSwap. The agent does not mint another.
 
@@ -442,3 +443,9 @@ Never commit `.env.local`.
 **Green** means tape is cheaper than mark. That gap is the trade.
 
 On the table, **To mark** is `(tape − mark) / mark`. Green is a discount. Red is a premium. After a buy, fill vs mark stays in this browser and links out on Solscan.
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
