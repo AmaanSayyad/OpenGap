@@ -87,7 +87,7 @@ export const MARKET = [
 ] as const;
 
 export const GTM = [
-  "Judges: live tape at opengap.xyz, pitch deck, public agent, this mint graduated to PumpSwap.",
-  "Distribution: @Open_Gap, Telegram, Discord, the pitch deck, and the deepest green name on the tape.",
+  "Judges: live tape at opengap.xyz, pitch deck, demo video, public agent, this mint graduated to PumpSwap.",
+  "Distribution: @Open_Gap, Telegram, Discord, the pitch deck, the demo video, and the deepest green name on the tape.",
   "Users: Phantom in, one Jupiter lot, 1% platform fee, fill in History. Not a US brokerage.",
 ] as const;

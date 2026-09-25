@@ -19,6 +19,7 @@
 | Discord | [https://discord.gg/5qHH5T2EnU](https://discord.gg/5qHH5T2EnU) |
 | GitHub | [https://github.com/AmaanSayyad/OpenGap](https://github.com/AmaanSayyad/OpenGap) |
 | Pitch | [https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6) |
+| Demo | [https://youtu.be/jr6mO7pstFY](https://youtu.be/jr6mO7pstFY) |
 | License | [MIT](LICENSE) |
 
 Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** launched on ClawPump and graduated to PumpSwap. The agent does not mint another.
@@ -379,7 +380,7 @@ Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints aw
 
 ## Token
 
-**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Graduated to [OPENGAP/SOL on PumpSwap](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) paid by a community member. Stock-paired pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). Room: [Discord](https://discord.gg/5qHH5T2EnU). Pitch: [Chronicle deck](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6).
+**$OPENGAP** mint `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` · launched 24 Sep 2026 on [ClawPump](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) against [@Open_Gap](https://x.com/Open_Gap). Graduated to [OPENGAP/SOL on PumpSwap](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) paid by a community member. Stock-paired pool: [OPENGAP/SPACEX on Meteora DAMM v2](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). Room: [Discord](https://discord.gg/5qHH5T2EnU). Pitch: [Chronicle deck](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6). Demo: [YouTube](https://youtu.be/jr6mO7pstFY).
 
 Utility: AnsemHack entry ticket and $OPENGAP creator-fee share. Desk revenue is the 1% Jupiter platform fee. Not equity. Not the product. The agent will not mint a second coin.
 
@@ -389,7 +390,7 @@ Long-term: the desk stays the company. Volume on the tape is the fee line. The t
 
 1. Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + live token).
 2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP on DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
-3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap), [Telegram](https://t.me/OpenGapp), [Discord](https://discord.gg/5qHH5T2EnU), and the [pitch deck](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name. A community member paid for [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD).
+3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap), [Telegram](https://t.me/OpenGapp), [Discord](https://discord.gg/5qHH5T2EnU), the [pitch deck](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6), and the [demo video](https://youtu.be/jr6mO7pstFY). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name. A community member paid for [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD).
 4. **Wallet users** — Phantom in, one $25 Jupiter lot, 1% platform fee, fill stays in History.
 5. **Do not** pretend this is a US stock app. Legal line stays in the footer.
 

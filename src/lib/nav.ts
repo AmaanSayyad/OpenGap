@@ -1,6 +1,7 @@
 import {
   DISCORD_URL,
   GITHUB_URL,
+  DEMO_VIDEO_URL,
   PITCH_DECK_URL,
   SITE_URL,
   TELEGRAM_URL,
@@ -33,6 +34,7 @@ export const FOOTER_LINKS = {
     { label: "Telegram", href: TELEGRAM_URL, logo: "/logos/telegram.svg" },
     { label: "Discord", href: DISCORD_URL, logo: "/logos/discord.svg" },
     { label: "Pitch", href: PITCH_DECK_URL },
+    { label: "Demo", href: DEMO_VIDEO_URL },
     { label: "$OPENGAP", href: TOKEN_DEXSCREENER, logo: "/opengap.png" },
     { label: "Pool", href: POOL_URL, logo: "/opengap.png" },
   ],

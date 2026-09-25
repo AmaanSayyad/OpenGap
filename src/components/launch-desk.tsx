@@ -21,7 +21,7 @@ import {
   TOKEN_URL,
   TOKEN_UTILITY,
 } from "@/lib/company";
-import { DISCORD_URL, PITCH_DECK_URL } from "@/lib/brand";
+import { DEMO_VIDEO_URL, DISCORD_URL, PITCH_DECK_URL } from "@/lib/brand";
 import { PLATFORM_FEE_WALLET } from "@/lib/constants";
 import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
@@ -539,6 +539,7 @@ const LaunchProject = memo(function LaunchProject({
             <LinkPill href={ANSEMHACK_URL}>AnsemHack</LinkPill>
             <LinkPill href={DISCORD_URL}>Discord</LinkPill>
             <LinkPill href={PITCH_DECK_URL}>Pitch</LinkPill>
+            <LinkPill href={DEMO_VIDEO_URL}>Demo</LinkPill>
           </div>
         </Panel>
       </div>

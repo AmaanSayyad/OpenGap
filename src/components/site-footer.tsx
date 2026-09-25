@@ -7,6 +7,7 @@ import {
   Lock,
   Presentation,
   Scale,
+  Video,
   ShoppingBasket,
   Wallet,
   type LucideIcon,
@@ -29,6 +30,7 @@ const PRODUCT_ICONS: Record<string, LucideIcon> = {
   Guide: BookOpen,
   "Buy all": ShoppingBasket,
   Pitch: Presentation,
+  Demo: Video,
 };
 
 function FooterMark({ src }: { src: string }) {

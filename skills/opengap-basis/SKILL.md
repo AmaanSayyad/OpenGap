@@ -17,6 +17,7 @@ X: https://x.com/Open_Gap
 Telegram: https://t.me/OpenGapp
 Discord: https://discord.gg/5qHH5T2EnU
 Pitch: https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6
+Demo: https://youtu.be/jr6mO7pstFY
 DexScreener: https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD (paid by a community member)
 PumpSwap: https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn
 Stock pool: https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB
