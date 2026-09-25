@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Bot, CandlestickChart, Layers, Scale } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { BRAND, TAGLINE } from "@/lib/brand";
+import { TOKEN_MINT, TOKEN_SOLSCAN, TOKEN_SYMBOL } from "@/lib/company";
 import { DESK_LINKS, FOOTER_LINKS } from "@/lib/nav";
 
 const DESK_ICONS = {
@@ -93,15 +94,28 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/60">
-        <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-2 px-4 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p className="inline-flex items-center gap-2">
-            © 2026 {BRAND}
-            <span aria-hidden>·</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logos/sol.png" alt="" width={14} height={14} className="size-3.5 object-contain" />
-            Mainnet Solana
+        <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-3 px-4 py-4 text-xs text-muted-foreground sm:px-6">
+          <p className="min-w-0">
+            <span className="mr-2">${TOKEN_SYMBOL} CA</span>
+            <a
+              href={TOKEN_SOLSCAN}
+              target="_blank"
+              rel="noreferrer"
+              className="break-all font-mono text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"
+            >
+              {TOKEN_MINT}
+            </a>
           </p>
-          <p>Not for US persons. Not advice.</p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="inline-flex items-center gap-2">
+              © 2026 {BRAND}
+              <span aria-hidden>·</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logos/sol.png" alt="" width={14} height={14} className="size-3.5 object-contain" />
+              Mainnet Solana
+            </p>
+            <p>Not for US persons. Not advice.</p>
+          </div>
         </div>
       </div>
     </footer>
