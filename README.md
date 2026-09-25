@@ -10,7 +10,7 @@
 | CA | `Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD` |
 | Token | [https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://clawpump.tech/tokens/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
 | DexScreener | [https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
-| Pool | [https://app.meteora.ag/pools/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB](https://app.meteora.ag/pools/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB) |
+| Pool | [https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB) |
 | Solscan | [https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD](https://solscan.io/token/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) |
 | X | [https://x.com/Open_Gap](https://x.com/Open_Gap) |
 | Telegram | [https://t.me/OpenGapp](https://t.me/OpenGapp) |

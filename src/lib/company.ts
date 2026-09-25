@@ -7,12 +7,12 @@ export const ANSEMHACK_URL = "https://clawpump.tech/ansemhack";
 
 export const STOCK_POOL = {
   name: "OPENGAP / SPACEX",
-  dex: "meteora",
+  dex: "dammv2",
   base: "OPENGAP",
   quote: "SPACEX",
   quoteMint: "PreANxuXjsy2pvisWWMNB6YaJNzr7681wJJr2rHsfTh",
   pairAddress: "Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB",
-  url: "https://app.meteora.ag/pools/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB",
+  url: "https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB",
   signature:
     "5tk6b3iz7nWbVjE8zNv6xnHW2Lqvc5XRFUsJYhymJVf3DU6TrX478X4YHJYDGCBSapKERzxrJAJCuX2YsMoeU5Pr",
   note: "Stock-paired Meteora DAMM for the Stocklana ClawPump bounty. Not a second memecoin.",

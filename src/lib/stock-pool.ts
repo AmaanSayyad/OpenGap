@@ -198,7 +198,7 @@ export async function createStockPairedPool() {
     pool: pool.toBase58(),
     position: position.toBase58(),
     signature,
-    url: `https://app.meteora.ag/pools/${pool.toBase58()}`,
+    url: `https://app.meteora.ag/dammv2/${pool.toBase58()}`,
     openGap: openGap.ui,
     spaceX: spaceX.ui,
   };
