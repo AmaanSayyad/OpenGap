@@ -91,7 +91,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "desks",
     title: "Four desks",
-    body: "PreStocks is the main tape. Tessera and Listed are other rooms. Launch is the agent — it can buy a cheap name for you.",
+    body: "PreStocks is the main tape. Tessera and Listed are other rooms. ClawPump is the agent — it can buy a cheap name for you.",
     target: "desks",
     desk: "prestocks",
   },
@@ -112,7 +112,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "launch",
     title: "The agent room",
-    body: "Launch is not another tape. This is the OpenGap bot. It watches the same names you just saw, and it can buy when a name is cheap.",
+    body: "ClawPump is not another tape. This is the OpenGap bot. It watches the same names you just saw, and it can buy when a name is cheap.",
     target: "launch",
     desk: "launch",
   },

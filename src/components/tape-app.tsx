@@ -53,7 +53,7 @@ const DESKS: Array<{ id: Desk; label: string }> = [
   { id: "prestocks", label: "PreStocks" },
   { id: "tessera", label: "Tessera" },
   { id: "basis", label: "Listed stocks" },
-  { id: "launch", label: "Launch" },
+  { id: "launch", label: "ClawPump" },
 ];
 
 const FILTERS: Array<{ id: Filter; label: string }> = [

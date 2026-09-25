@@ -75,7 +75,7 @@ One site, four desks, one rule: **green is cheaper than the mark.**
 | PreStocks | `/` | Private-company tape. Jupiter vs PreStocks mark. Buy / sell in USDC or SOL. |
 | Tessera | `/?desk=tessera` | T-tokens. Same buy flow. Different claim. |
 | Listed stocks | `/?desk=basis` | Yahoo cash vs xStock tape. Evidence only. |
-| Launch | `/?desk=launch` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP graduated to [PumpSwap OPENGAP/SOL](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). Stock-paired Meteora DAMM v2: [OPENGAP/SPACEX](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). |
+| ClawPump | `/?desk=clawpump` | OpenGap agent. Watches the tape. Buys at −3%. $OPENGAP graduated to [PumpSwap OPENGAP/SOL](https://dexscreener.com/solana/65m5eb4WW7w18HJQ9CbzHR1gqUMor8RrmH1dKP2S8wLn). Stock-paired Meteora DAMM v2: [OPENGAP/SPACEX](https://app.meteora.ag/dammv2/Fck8ZewjPmcvY9KZAiQiXx81y7Y8Lr52HLY15kquPqsB). |
 
 Open a name with `/?buy=SPACEX`. Replay the guide with `/?tour=1`. Search from the header. Portfolio is local fills plus live wallet lots.
 

@@ -18,7 +18,7 @@ export const DESK_LINKS: Array<{
   { id: "prestocks", label: "PreStocks", href: "/?desk=prestocks", hint: "Private companies" },
   { id: "tessera", label: "Tessera", href: "/?desk=tessera", hint: "Loan tokens" },
   { id: "basis", label: "Listed stocks", href: "/?desk=basis", hint: "Cash vs on-chain" },
-  { id: "launch", label: "Launch", href: "/?desk=launch", hint: "The OpenGap agent" },
+  { id: "launch", label: "ClawPump", href: "/?desk=clawpump", hint: "The OpenGap agent" },
 ];
 
 export const FOOTER_LINKS = {

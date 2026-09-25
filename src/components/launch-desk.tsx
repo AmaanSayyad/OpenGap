@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { BrandLogo } from "@/components/brand-logo";
 import { TokenLogo } from "@/components/token-logo";
 import { TourHint } from "@/components/product-tour";
@@ -462,199 +462,199 @@ export function LaunchDesk() {
         </div>
       ) : null}
 
-      <Panel>
-        <Eyebrow>Revenue</Eyebrow>
-        <p className="mt-2 text-lg font-semibold tracking-tight">1% on every fill</p>
-        <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
-          {BUSINESS.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-        <a
-          href={`https://solscan.io/account/${PLATFORM_FEE_WALLET}`}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-4 inline-flex h-8 items-center rounded-full bg-muted px-3 font-mono text-sm"
-        >
-          {shortAddress(PLATFORM_FEE_WALLET, 6)}
-        </a>
-      </Panel>
+      <LaunchProject pools={pools} dbc={dbc} />
+    </div>
+  );
+}
 
-      <Panel data-tour="launch-quote" className="bg-card/40">
-        <Eyebrow>Token · ${TOKEN_SYMBOL}</Eyebrow>
-        <p className="mt-2 text-lg font-semibold tracking-tight">
-          Graduated to PumpSwap
-        </p>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          Mint {shortAddress(TOKEN_MINT, 6)}. Launched 24 Sep 2026 on ClawPump
-          against{" "}
-          <a href="https://x.com/Open_Gap" className="underline underline-offset-4" target="_blank" rel="noreferrer">
-            @Open_Gap
-          </a>
-          , then migrated to {PUMP_POOL.name}. Entry ticket for AnsemHack. The
-          desk takes 1% on every Jupiter fill. $OPENGAP creator fees stay with
-          the project. The agent will not mint a second coin.
-        </p>
-        <ul className="mt-4 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
-          {TOKEN_UTILITY.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            href={TOKEN_DEXSCREENER}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
-          >
-            DexScreener
-          </a>
-          <a
-            href={TOKEN_PUMP}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Pump.fun
-          </a>
-          <a
-            href={TOKEN_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            ClawPump
-          </a>
-          <a
-            href={TOKEN_SOLSCAN}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Solscan
-          </a>
-          <a
-            href={ANSEMHACK_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            AnsemHack
-          </a>
-          <a
-            href={DISCORD_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Discord
-          </a>
-          <a
-            href={PITCH_DECK_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Pitch
-          </a>
-        </div>
-        <p className="mt-6 text-xs font-medium text-muted-foreground">Roadmap</p>
-        <ul className="mt-2 max-w-2xl space-y-2 text-sm leading-6 text-muted-foreground">
-          {ROADMAP.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-      </Panel>
+const LaunchProject = memo(function LaunchProject({
+  pools,
+  dbc,
+}: {
+  pools: MeteoraPool[];
+  dbc: { ready?: boolean; program?: string | null } | null;
+}) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-2">
+        <Panel>
+          <Eyebrow>Revenue</Eyebrow>
+          <p className="mt-2 text-lg font-semibold tracking-tight">
+            1% on every fill
+          </p>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+            {BUSINESS.map((line) => (
+              <li key={line} className="flex gap-3">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-muted-foreground/50" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5">
+            <Eyebrow>Fee wallet</Eyebrow>
+            <a
+              href={`https://solscan.io/account/${PLATFORM_FEE_WALLET}`}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex max-w-full items-center rounded-full bg-muted px-3 py-1.5 font-mono text-xs sm:text-sm"
+            >
+              <span className="truncate">{PLATFORM_FEE_WALLET}</span>
+            </a>
+          </div>
+        </Panel>
 
-      <Panel>
-        <Eyebrow>PumpSwap pool</Eyebrow>
-        <p className="mt-2 text-lg font-semibold tracking-tight">{PUMP_POOL.name}</p>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          {PUMP_POOL.note}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            href={PUMP_POOL.url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
-          >
-            DexScreener
-          </a>
-          <a
-            href={TOKEN_PUMP}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Pump.fun
-          </a>
-        </div>
-      </Panel>
-
-      <Panel>
-        <Eyebrow>Stock-paired Meteora pool</Eyebrow>
-        <p className="mt-2 text-lg font-semibold tracking-tight">{STOCK_POOL.name}</p>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-          {STOCK_POOL.note} Quote is the PreStock, not SOL.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            href={STOCK_POOL.url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-foreground px-3 text-sm text-background"
-          >
-            Meteora
-          </a>
-          <a
-            href={`https://solscan.io/tx/${STOCK_POOL.signature}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
-          >
-            Create tx
-          </a>
-        </div>
-      </Panel>
+        <Panel data-tour="launch-quote" className="bg-card/40">
+          <Eyebrow>Token · ${TOKEN_SYMBOL}</Eyebrow>
+          <p className="mt-2 text-lg font-semibold tracking-tight">
+            Graduated to PumpSwap
+          </p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Mint {shortAddress(TOKEN_MINT, 6)}. Launched 24 Sep 2026 on ClawPump
+            against{" "}
+            <a
+              href="https://x.com/Open_Gap"
+              className="underline underline-offset-4"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @Open_Gap
+            </a>
+            . Same mint. The agent will not mint again.
+          </p>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+            {TOKEN_UTILITY.map((line) => (
+              <li key={line} className="flex gap-3">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-muted-foreground/50" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <LinkPill href={TOKEN_DEXSCREENER} primary>
+              DexScreener
+            </LinkPill>
+            <LinkPill href={TOKEN_PUMP}>Pump.fun</LinkPill>
+            <LinkPill href={TOKEN_URL}>ClawPump</LinkPill>
+            <LinkPill href={TOKEN_SOLSCAN}>Solscan</LinkPill>
+            <LinkPill href={ANSEMHACK_URL}>AnsemHack</LinkPill>
+            <LinkPill href={DISCORD_URL}>Discord</LinkPill>
+            <LinkPill href={PITCH_DECK_URL}>Pitch</LinkPill>
+          </div>
+        </Panel>
+      </div>
 
       <div>
-        <Eyebrow>Other pools</Eyebrow>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {dbc?.ready
-            ? "Meteora is up. PreStock buys still go through Jupiter."
-            : dbc?.program
-              ? "Meteora is not responding. Jupiter still works."
-              : "Checking other venues…"}
-        </p>
+        <Eyebrow>Roadmap</Eyebrow>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          {ROADMAP.map((line, index) => (
+            <Panel key={line} className="p-4">
+              <span className="flex size-6 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+                {index + 1}
+              </span>
+              <p className="mt-3 text-sm leading-6">{line}</p>
+            </Panel>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-2">
+        <Panel>
+          <Eyebrow>PumpSwap · primary</Eyebrow>
+          <p className="mt-2 text-lg font-semibold tracking-tight">
+            {PUMP_POOL.name}
+          </p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            {PUMP_POOL.note}
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <LinkPill href={PUMP_POOL.url} primary>
+              DexScreener
+            </LinkPill>
+            <LinkPill href={TOKEN_PUMP}>Pump.fun</LinkPill>
+          </div>
+        </Panel>
+
+        <Panel>
+          <Eyebrow>Meteora · stock pair</Eyebrow>
+          <p className="mt-2 text-lg font-semibold tracking-tight">
+            {STOCK_POOL.name}
+          </p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            {STOCK_POOL.note} Quote is the PreStock, not SOL.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <LinkPill href={STOCK_POOL.url} primary>
+              Meteora
+            </LinkPill>
+            <LinkPill href={`https://solscan.io/tx/${STOCK_POOL.signature}`}>
+              Create tx
+            </LinkPill>
+          </div>
+        </Panel>
+      </div>
+
+      <Panel className="p-0">
+        <div className="flex flex-wrap items-end justify-between gap-3 px-6 pt-5">
+          <div>
+            <Eyebrow>Other pools</Eyebrow>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {dbc?.ready
+                ? "Meteora is up. PreStock buys still go through Jupiter."
+                : dbc?.program
+                  ? "Meteora is not responding. Jupiter still works."
+                  : "Checking other venues…"}
+            </p>
+          </div>
+        </div>
         {pools.length ? (
-          <ul className="mt-3 divide-y divide-border/60 rounded-2xl border border-border/80">
+          <ul className="mt-4 divide-y divide-border/60 border-t border-border/60">
             {pools.slice(0, 6).map((pool) => (
-              <li
-                key={pool.pairAddress}
-                className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm"
-              >
+              <li key={pool.pairAddress}>
                 <a
                   href={poolHref(pool.dex, pool.pairAddress)}
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate hover:underline"
+                  className="flex items-center justify-between gap-3 px-6 py-3 text-sm hover:bg-muted/40"
                 >
-                  {pool.name}
+                  <span className="truncate font-medium">{pool.name}</span>
+                  <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                    {pool.tvl != null ? formatUsd(pool.tvl) : pool.dex}
+                  </span>
                 </a>
-                <span className="shrink-0 font-mono text-xs text-muted-foreground">
-                  {pool.tvl != null ? formatUsd(pool.tvl) : pool.dex}
-                </span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="px-6 pb-5 pt-3 text-sm text-muted-foreground">
             No extra stock pools listed yet. Buys still go through Jupiter.
           </p>
         )}
-      </div>
+      </Panel>
     </div>
+  );
+});
+
+function LinkPill({
+  href,
+  children,
+  primary = false,
+}: {
+  href: string;
+  children: string;
+  primary?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={cn(
+        "inline-flex h-8 items-center rounded-full px-3 text-sm",
+        primary ? "bg-foreground text-background" : "bg-muted",
+      )}
+    >
+      {children}
+    </a>
   );
 }
 

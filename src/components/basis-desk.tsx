@@ -16,22 +16,10 @@ import { formatPct, formatPrice, formatSignedUsd } from "@/lib/format";
 import type { BasisRow } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-type BinanceStatus = {
-  signed: boolean;
-  signedStatus: number;
-  signedError?: string | null;
-  canTrade: boolean;
-  balances: Array<{ asset: string; free: string }>;
-  usdcUsd: number | null;
-  btcUsd: number | null;
-  note: string;
-};
-
 const POLL_MS = 20_000;
 
 export function BasisDesk() {
   const [basis, setBasis] = useState<BasisRow[]>([]);
-  const [binance, setBinance] = useState<BinanceStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [left, setLeft] = useState(POLL_MS / 1000);
   const [fetchedAt, setFetchedAt] = useState(Date.now());
@@ -44,13 +32,11 @@ export function BasisDesk() {
         const response = await fetch("/api/basis", { cache: "no-store" });
         const payload = (await response.json()) as {
           basis?: BasisRow[];
-          binance?: BinanceStatus;
           error?: string;
         };
         if (!response.ok) throw new Error(payload.error ?? "Basis failed");
         if (cancelled) return;
         setBasis(payload.basis ?? []);
-        setBinance(payload.binance ?? null);
         setFetchedAt(Date.now());
         setError(null);
       } catch (next) {
@@ -93,7 +79,6 @@ export function BasisDesk() {
 
       <PriceChart symbol={picked} />
 
-      <div className="grid gap-6 md:grid-cols-2 md:items-start">
       {cheap ? (
         <Panel className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -119,29 +104,7 @@ export function BasisDesk() {
             {cheap.xPremium != null ? formatPct(cheap.xPremium) : "—"}
           </p>
         </Panel>
-      ) : (
-        <div />
-      )}
-
-      {binance ? (
-        <div className="grid grid-cols-2 gap-3">
-          <Mini
-            label="Binance signed"
-            value={
-              binance.signed
-                ? "live"
-                : binance.signedError ?? `err ${binance.signedStatus}`
-            }
-          />
-          <Mini label="USDCUSDT" value={binance.usdcUsd ? formatPrice(binance.usdcUsd) : "—"} />
-          <Mini label="BTCUSDT" value={binance.btcUsd ? formatPrice(binance.btcUsd) : "—"} />
-          <Mini
-            label="Spot balances"
-            value={binance.balances.length ? binance.balances.map((row) => row.asset).join(" ") : "none"}
-          />
-        </div>
       ) : null}
-      </div>
 
       {error ? (
         <div className="rounded-xl border border-destructive/30 px-4 py-6 text-sm text-destructive">
@@ -239,14 +202,5 @@ export function BasisDesk() {
         </p>
       )}
     </div>
-  );
-}
-
-function Mini({ label, value }: { label: string; value: string }) {
-  return (
-    <Panel className="px-4 py-3">
-      <Eyebrow>{label}</Eyebrow>
-      <div className="mt-1 font-mono text-sm">{value}</div>
-    </Panel>
   );
 }

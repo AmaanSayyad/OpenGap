@@ -5,7 +5,9 @@ import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eyebrow, PageTitle, Panel } from "@/components/ui-kit";
+import { PLATFORM_FEE_WALLET } from "@/lib/constants";
 import { formatUsd, shortAddress } from "@/lib/format";
+import type { PlatformVolume } from "@/lib/platform-volume";
 import {
   formatUnlockAt,
   isUnlocked,
@@ -40,6 +42,7 @@ export function AdminView() {
   const [stakes, setStakes] = useState<StakeRecord[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [paid, setPaid] = useState<string[]>([]);
+  const [volume, setVolume] = useState<PlatformVolume | null>(null);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -66,18 +69,24 @@ export function AdminView() {
 
   async function load() {
     try {
-      const response = await fetch("/api/stakes", { cache: "no-store" });
-      if (response.status === 401) {
+      const [stakesRes, volumeRes] = await Promise.all([
+        fetch("/api/stakes", { cache: "no-store" }),
+        fetch("/api/admin/volume", { cache: "no-store" }),
+      ]);
+      if (stakesRes.status === 401 || volumeRes.status === 401) {
         setAuthed(false);
         setStakes([]);
+        setVolume(null);
         return;
       }
-      const payload = (await response.json()) as {
+      const payload = (await stakesRes.json()) as {
         stakes?: StakeRecord[];
         error?: string;
       };
+      const desk = (await volumeRes.json()) as PlatformVolume & { error?: string };
       setStakes(Array.isArray(payload.stakes) ? payload.stakes : []);
-      setError(payload.error ?? null);
+      setVolume(desk.error ? null : desk);
+      setError(payload.error ?? desk.error ?? null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Stake book failed");
     }
@@ -116,6 +125,7 @@ export function AdminView() {
     await fetch("/api/admin/logout", { method: "POST" });
     setAuthed(false);
     setStakes([]);
+    setVolume(null);
   }
 
   function togglePaid(signature: string) {
@@ -197,6 +207,49 @@ export function AdminView() {
 
         {authed ? (
         <>
+
+        <section className="grid gap-3 sm:grid-cols-3">
+          <Stat
+            label="Platform volume"
+            value={volume ? formatUsd(volume.volumeUsd) : "…"}
+            hint={
+              volume
+                ? `${volume.fills} Jupiter fill${volume.fills === 1 ? "" : "s"} · 1% fee`
+                : "Reading the fee wallet…"
+            }
+          />
+          <Stat
+            label="Fees collected"
+            value={volume ? formatUsd(volume.feesUsd) : "…"}
+            hint={
+              volume
+                ? `${formatAmt(volume.feesUsdc)} USDC · ${formatAmt(volume.feesSol)} SOL`
+                : "Inbound to the fee wallet"
+            }
+          />
+          <Stat
+            label="Fee wallet now"
+            value={volume ? formatUsd(volume.walletUsdc + volume.walletSol * volume.solUsd) : "…"}
+            hint={
+              volume
+                ? `${formatAmt(volume.walletUsdc)} USDC · ${formatAmt(volume.walletSol)} SOL`
+                : shortAddress(PLATFORM_FEE_WALLET, 4)
+            }
+          />
+        </section>
+        {volume ? (
+          <p className="-mt-2 text-xs text-muted-foreground">
+            Volume is inbound 1% Jupiter fees × 100.{" "}
+            <a
+              href={`https://solscan.io/account/${PLATFORM_FEE_WALLET}`}
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4"
+            >
+              Fee wallet
+            </a>
+          </p>
+        ) : null}
 
         <section className="grid gap-3 sm:grid-cols-3">
           <Stat label="Locks" value={String(stakes.length)} />

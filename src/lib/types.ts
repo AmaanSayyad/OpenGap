@@ -82,8 +82,6 @@ export type BasisRow = {
   cashSource: string | null;
   xSource: string | null;
   venue: string;
-  usdcUsd?: number | null;
-  btcUsd?: number | null;
 };
 
 export type MeteoraPool = {

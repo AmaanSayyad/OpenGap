@@ -61,14 +61,6 @@ async function yahooQuotes(tickers: string[]) {
   return fallback;
 }
 
-async function binancePrice(symbol: string) {
-  const data = await fetchJson<{ price?: string }>(
-    `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`,
-  );
-  const value = Number(data?.price);
-  return Number.isFinite(value) ? value : null;
-}
-
 async function dexPrice(mint: string) {
   const data = await fetchJson<{
     pairs?: Array<{
@@ -100,9 +92,7 @@ export async function getBasis(): Promise<BasisRow[]> {
     return basisCache.rows;
   }
 
-  const [usdc, btc, cash, jup] = await Promise.all([
-    binancePrice("USDCUSDT"),
-    binancePrice("BTCUSDT"),
+  const [cash, jup] = await Promise.all([
     yahooQuotes(PUBLIC_NAMES.map((item) => item.yahoo)),
     jupiterUsd(PUBLIC_NAMES.map((item) => item.xMint)),
   ]);
@@ -149,7 +139,6 @@ export async function getBasis(): Promise<BasisRow[]> {
     };
   });
 
-  const next = rows.map((row) => ({ ...row, usdcUsd: usdc, btcUsd: btc }));
-  basisCache = { at: Date.now(), rows: next };
-  return next;
+  basisCache = { at: Date.now(), rows };
+  return rows;
 }
