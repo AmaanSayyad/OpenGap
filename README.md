@@ -22,7 +22,9 @@
 | Demo | [https://youtu.be/jr6mO7pstFY](https://youtu.be/jr6mO7pstFY) |
 | License | [MIT](LICENSE) |
 
-Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The Launch desk is a ClawPump agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** launched on ClawPump and graduated to PumpSwap. The agent does not mint another.
+Opengap is a mainnet Solana desk that compares the **issuer mark** to the **Jupiter tape** — the split-aware price you actually pay — and lets you buy the gap. Green means cheaper than official. The ClawPump desk is a public agent that watches the same tape and can buy a $5 lot when a name is at least 3% cheap. **$OPENGAP** launched on ClawPump and graduated to PumpSwap. The agent does not mint another.
+
+Traction (last 24 hours as of 26 Sep 2026): 20k+ visitors, 1k+ users, $20k+ platform volume, 1k+ community, $600k token volume, 500+ holders. Dev wallet 0.8%. No side wallets.
 
 Not for US persons. Not advice.
 
@@ -384,17 +386,19 @@ Tokenized private and listed names trade 24/7 on Solana. Jupiter often prints aw
 
 Utility: AnsemHack entry ticket and $OPENGAP creator-fee share. Desk revenue is the 1% Jupiter platform fee. Not equity. Not the product. The agent will not mint a second coin.
 
+Supply: **0.8% in the dev wallet. No side wallets.** Two early sales at about **$20k market cap**.
+
 Long-term: the desk stays the company. Volume on the tape is the fee line. The token is membership / creator-fee share, not a second swap tax. Roadmap is funded −3% buys, more names, and a kill-switch — not a new memecoin.
 
 ## Go-to-market
 
 1. Stocklana path (tape + Jupiter + Tessera + Meteora) and AnsemHack path (public agent + live token).
-2. **ClawPump marketplace** — agent is public; Launch desk is the product page; [$OPENGAP on DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
+2. **ClawPump marketplace** — agent is public; ClawPump desk is the product page; [$OPENGAP on DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD) is the entry.
 3. **Crypto Twitter** — [@Open_Gap](https://x.com/Open_Gap), [Telegram](https://t.me/OpenGapp), [Discord](https://discord.gg/5qHH5T2EnU), the [pitch deck](https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6), and the [demo video](https://youtu.be/jr6mO7pstFY). One sentence: buy tokenized stocks when they're cheaper. Link the deepest green name. A community member paid for [DexScreener](https://dexscreener.com/solana/Fvto3QgSLbcWdq331BoR66RDkT7dZYgTS9JzbntMf7rD).
 4. **Wallet users** — Phantom in, one $25 Jupiter lot, 1% platform fee, fill stays in History.
 5. **Do not** pretend this is a US stock app. Legal line stays in the footer.
 
-Traction: live mainnet desk, public agent, funded trading wallet, token live. We do not invent user counts.
+Traction (last 24 hours as of 26 Sep 2026): **20k+ visitors**, **1k+ users**, **$20k+ platform volume**, **1k+ community**, **$600k token volume**, **500+ holders**.
 
 ---
 

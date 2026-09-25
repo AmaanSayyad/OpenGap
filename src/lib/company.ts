@@ -60,10 +60,31 @@ export const TEAM = [
   { name: "Draheem", role: "Chief Motion Video Designer" },
 ] as const;
 
+export const TRACTION_AS_OF = "26 Sep 2026";
+export const TRACTION_WINDOW = "Last 24 hours";
+
+export const TRACTION = [
+  { label: "Visitors", value: "20k+" },
+  { label: "Users", value: "1k+" },
+  { label: "Platform volume", value: "$20k+" },
+  { label: "Community", value: "1k+" },
+  { label: "Token volume", value: "$600k" },
+  { label: "Token holders", value: "500+" },
+] as const;
+
+export const TRACTION_LINE =
+  "20k+ visitors, 1k+ users, $20k+ platform volume, 1k+ community, $600k token volume, 500+ holders — last 24 hours as of 26 Sep 2026.";
+
+export const TOKEN_SUPPLY = [
+  "Dev wallet holds 0.8% of supply. No side wallets.",
+  "Two early sales at about $20k market cap. No other insider books.",
+] as const;
+
 export const TOKEN_UTILITY = [
   "AnsemHack entry ticket — the same mint, launched on ClawPump and now graduated to PumpSwap. Judges verify against @Open_Gap.",
   "Desk revenue is the 1% Jupiter platform fee on every buy and sell. $OPENGAP creator fees stay with the project. The token is not equity.",
   "The agent never mints again. A human already launched this mint on purpose.",
+  "Dev wallet holds 0.8% of supply. No side wallets. Two early sales at about $20k MC.",
   "DexScreener was paid by a community member. Discord is the room.",
   "Stake $OPENGAP on /stake — 30/90/180/360 days at matching APY. Send to the vault; locks show in Portfolio.",
 ] as const;
@@ -87,7 +108,8 @@ export const MARKET = [
 ] as const;
 
 export const GTM = [
-  "Judges: live tape at opengap.xyz, pitch deck, demo video, public agent, this mint graduated to PumpSwap.",
+  "Judges: live tape at opengap.xyz, pitch deck, demo video, public ClawPump agent, this mint graduated to PumpSwap.",
   "Distribution: @Open_Gap, Telegram, Discord, the pitch deck, the demo video, and the deepest green name on the tape.",
   "Users: Phantom in, one Jupiter lot, 1% platform fee, fill in History. Not a US brokerage.",
+  TRACTION_LINE,
 ] as const;

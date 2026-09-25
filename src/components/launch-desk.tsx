@@ -13,6 +13,9 @@ import {
   PUMP_POOL,
   ROADMAP,
   STOCK_POOL,
+  TRACTION,
+  TRACTION_WINDOW,
+  TRACTION_AS_OF,
   TOKEN_DEXSCREENER,
   TOKEN_MINT,
   TOKEN_PUMP,
@@ -441,6 +444,21 @@ export function LaunchDesk() {
             <p className="mt-6 text-sm text-muted-foreground">Reading the tape…</p>
           )}
         </Panel>
+      </div>
+
+      <div>
+        <Eyebrow>Traction</Eyebrow>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {TRACTION_WINDOW} as of {TRACTION_AS_OF}.
+        </p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {TRACTION.map((row) => (
+            <Panel key={row.label} className="p-4">
+              <Eyebrow>{row.label}</Eyebrow>
+              <p className="mt-2 font-mono text-2xl tracking-tight">{row.value}</p>
+            </Panel>
+          ))}
+        </div>
       </div>
 
       {desk?.macro?.length ? (
