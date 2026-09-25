@@ -21,7 +21,7 @@ import {
   TOKEN_URL,
   TOKEN_UTILITY,
 } from "@/lib/company";
-import { DISCORD_URL } from "@/lib/brand";
+import { DISCORD_URL, PITCH_DECK_URL } from "@/lib/brand";
 import { PLATFORM_FEE_WALLET } from "@/lib/constants";
 import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
@@ -548,6 +548,14 @@ export function LaunchDesk() {
             className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
           >
             Discord
+          </a>
+          <a
+            href={PITCH_DECK_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm"
+          >
+            Pitch
           </a>
         </div>
         <p className="mt-6 text-xs font-medium text-muted-foreground">Roadmap</p>

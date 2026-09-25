@@ -5,6 +5,7 @@ import {
   CandlestickChart,
   Layers,
   Lock,
+  Presentation,
   Scale,
   ShoppingBasket,
   Wallet,
@@ -27,6 +28,7 @@ const PRODUCT_ICONS: Record<string, LucideIcon> = {
   Stake: Lock,
   Guide: BookOpen,
   "Buy all": ShoppingBasket,
+  Pitch: Presentation,
 };
 
 function FooterMark({ src }: { src: string }) {

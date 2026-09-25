@@ -4,7 +4,16 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/providers";
 import { SiteFooter } from "@/components/site-footer";
-import { BRAND, DISCORD_URL, GITHUB_URL, SITE_URL, TAGLINE, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import {
+  BRAND,
+  DISCORD_URL,
+  GITHUB_URL,
+  PITCH_DECK_URL,
+  SITE_URL,
+  TAGLINE,
+  TELEGRAM_URL,
+  X_URL,
+} from "@/lib/brand";
 import { POOL_URL, TOKEN_DEXSCREENER } from "@/lib/company";
 import "./globals.css";
 
@@ -38,6 +47,7 @@ export const metadata: Metadata = {
     twitter: X_URL,
     telegram: TELEGRAM_URL,
     discord: DISCORD_URL,
+    pitch: PITCH_DECK_URL,
     token: TOKEN_DEXSCREENER,
     pool: POOL_URL,
   },

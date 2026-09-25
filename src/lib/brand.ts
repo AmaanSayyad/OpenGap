@@ -6,6 +6,8 @@ export const GITHUB_URL = "https://github.com/AmaanSayyad/OpenGap";
 export const X_URL = "https://x.com/Open_Gap";
 export const TELEGRAM_URL = "https://t.me/OpenGapp";
 export const DISCORD_URL = "https://discord.gg/5qHH5T2EnU";
+export const PITCH_DECK_URL =
+  "https://app.chroniclehq.com/share/0f55cc23-897b-4a17-9ae9-c430e7e7eadb/1a938a0a-fb2d-47e7-afda-07774fe4a1f6";
 
 export const GLOSSARY = {
   tape: "Tape is the live price on Jupiter — what you actually pay if you buy right now.",

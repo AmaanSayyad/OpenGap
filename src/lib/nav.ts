@@ -1,4 +1,11 @@
-import { DISCORD_URL, GITHUB_URL, SITE_URL, TELEGRAM_URL, X_URL } from "@/lib/brand";
+import {
+  DISCORD_URL,
+  GITHUB_URL,
+  PITCH_DECK_URL,
+  SITE_URL,
+  TELEGRAM_URL,
+  X_URL,
+} from "@/lib/brand";
 import { POOL_URL, STOCK_POOL, TOKEN_DEXSCREENER } from "@/lib/company";
 import type { Desk } from "@/lib/tour";
 
@@ -25,6 +32,7 @@ export const FOOTER_LINKS = {
     { label: "X", href: X_URL, logo: "/logos/x.svg" },
     { label: "Telegram", href: TELEGRAM_URL, logo: "/logos/telegram.svg" },
     { label: "Discord", href: DISCORD_URL, logo: "/logos/discord.svg" },
+    { label: "Pitch", href: PITCH_DECK_URL },
     { label: "$OPENGAP", href: TOKEN_DEXSCREENER, logo: "/opengap.png" },
     { label: "Pool", href: POOL_URL, logo: "/opengap.png" },
   ],
