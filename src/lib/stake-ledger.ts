@@ -1,6 +1,7 @@
 import { Connection, PublicKey } from "@solana/web3.js";
 import { getTokenUiAmount, sendConnection } from "@/lib/server-wallet";
 import {
+  isStakeDays,
   mergeStakes,
   sanitizeStake,
   STAKING_MINT,
@@ -160,7 +161,7 @@ function memoDays(instructions: unknown[]): StakeDays | null {
     if (!match) continue;
     if (program && program !== MEMO && row.program !== "spl-memo") continue;
     const days = Number(match[1]);
-    if (days === 30 || days === 90 || days === 180 || days === 360) return days;
+    if (isStakeDays(days)) return days;
   }
   return null;
 }

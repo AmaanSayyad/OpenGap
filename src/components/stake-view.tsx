@@ -19,6 +19,7 @@ import { formatUsd, shortAddress } from "@/lib/format";
 import {
   formatUnlockAt,
   quoteStake,
+  stakeApyLine,
   STAKE_TERMS,
   STAKING_MINT,
   STAKING_VAULT,
@@ -99,9 +100,8 @@ export function StakeView({ totalStaked = null }: { totalStaked?: number | null 
           <Eyebrow>$OPENGAP staking</Eyebrow>
           <PageTitle className="max-w-none">Lock $OPENGAP. Pick a term.</PageTitle>
           <p className="w-full text-sm leading-6 text-muted-foreground">
-            30 days 30% APY, 90 days 90%, 180 days 180%, 360 days 360%. Send $
-            {TOKEN_SYMBOL} from your wallet. You will automatically receive the
-            principal + reward at the unlock time.
+            {stakeApyLine()}. Send ${TOKEN_SYMBOL} from your wallet. You will
+            automatically receive the principal + reward at the unlock time.
           </p>
           <Panel className="mt-2 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -129,7 +129,7 @@ export function StakeView({ totalStaked = null }: { totalStaked?: number | null 
           </Panel>
         </section>
 
-        <section className="grid min-w-0 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="grid min-w-0 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {STAKE_TERMS.map((term) => {
             const row = quoteStake(parsed, term.days);
             const active = days === term.days;

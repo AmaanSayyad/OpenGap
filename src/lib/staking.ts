@@ -4,13 +4,27 @@ export const STAKING_VAULT = "5vkmdtnxfZ1WhiYYS1g1mXAwyNSJ63thPR7grwesywwe";
 export const STAKING_MINT = TOKEN_MINT;
 
 export const STAKE_TERMS = [
-  { days: 30, apy: 30 },
-  { days: 90, apy: 90 },
-  { days: 180, apy: 180 },
-  { days: 360, apy: 360 },
+  { days: 7, apy: 3.5 },
+  { days: 30, apy: 15 },
+  { days: 90, apy: 45 },
+  { days: 180, apy: 90 },
+  { days: 360, apy: 180 },
 ] as const;
 
 export type StakeDays = (typeof STAKE_TERMS)[number]["days"];
+export const STAKE_DAY_VALUES = STAKE_TERMS.map((term) => term.days);
+
+export function isStakeDays(days: number): days is StakeDays {
+  return STAKE_DAY_VALUES.includes(days as StakeDays);
+}
+
+export function stakeApyLine() {
+  return STAKE_TERMS.map((term, index) =>
+    index === 0
+      ? `${term.days} days ${term.apy}% APY`
+      : `${term.days} days ${term.apy}%`,
+  ).join(", ");
+}
 
 export type StakeQuote = {
   days: StakeDays;
@@ -34,7 +48,11 @@ export type StakeRecord = {
 };
 
 export function termFor(days: number) {
-  return STAKE_TERMS.find((term) => term.days === days) ?? STAKE_TERMS[0];
+  return (
+    STAKE_TERMS.find((term) => term.days === days) ??
+    STAKE_TERMS.find((term) => term.days === 30) ??
+    STAKE_TERMS[0]
+  );
 }
 
 export function quoteStake(

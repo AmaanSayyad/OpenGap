@@ -170,7 +170,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     id: "stake",
     title: "Lock $OPENGAP",
-    body: "Pick 30, 90, 180, or 360 days. APY matches the term. You send $OPENGAP to the staking address; the lock and reward show in Portfolio on this device.",
+    body: "Pick 7, 30, 90, 180, or 360 days. APY is 3.5%, 15%, 45%, 90%, or 180%. You send $OPENGAP to the staking address; the lock and reward show in Portfolio on this device.",
     target: "stake",
     href: "/stake",
   },

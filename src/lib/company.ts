@@ -86,7 +86,7 @@ export const TOKEN_UTILITY = [
   "The agent never mints again. A human already launched this mint on purpose.",
   "Dev wallet holds 0.8% of supply. No side wallets. Two early sales at about $20k MC.",
   "DexScreener was paid by a community member. Discord is the room.",
-  "Stake $OPENGAP on /stake — 30/90/180/360 days at matching APY. Send to the vault; locks show in Portfolio.",
+  "Stake $OPENGAP on /stake — 7/30/90/180/360 days at 3.5/15/45/90/180% APY. Send to the vault; locks show in Portfolio.",
 ] as const;
 
 export const BUSINESS = [
