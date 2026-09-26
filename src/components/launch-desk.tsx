@@ -26,8 +26,9 @@ import {
 } from "@/lib/company";
 import { DEMO_VIDEO_URL, DISCORD_URL, PITCH_DECK_URL } from "@/lib/brand";
 import { PLATFORM_FEE_WALLET } from "@/lib/constants";
-import { formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
+import { formatCompact, formatPct, formatPrice, formatUsd, shortAddress } from "@/lib/format";
 import { poolHref } from "@/lib/routes";
+import type { TokenMarket } from "@/lib/token-market";
 import type { MeteoraPool } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -93,24 +94,29 @@ export function LaunchDesk() {
   const [dbc, setDbc] = useState<{ ready?: boolean; program?: string | null } | null>(
     null,
   );
+  const [market, setMarket] = useState<TokenMarket | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     async function load() {
       try {
-        const [claw, launch] = await Promise.all([
+        const [claw, launch, tape] = await Promise.all([
           fetch("/api/clawpump", { cache: "no-store" }).then((response) =>
             response.json(),
           ),
           fetch("/api/launch", { cache: "no-store" })
             .then((response) => response.json())
             .catch(() => ({})),
+          fetch("/api/token-market", { cache: "no-store" })
+            .then((response) => response.json())
+            .catch(() => null),
         ]);
         if (cancelled) return;
         setDesk(claw as DeskPayload);
         setPools((launch as { pools?: MeteoraPool[] }).pools ?? []);
         setDbc((launch as { dbc?: { ready?: boolean; program?: string | null } }).dbc ?? null);
+        if (tape && !("error" in tape)) setMarket(tape as TokenMarket);
       } catch (error) {
         if (!cancelled) {
           setDesk({
@@ -480,7 +486,7 @@ export function LaunchDesk() {
         </div>
       ) : null}
 
-      <LaunchProject pools={pools} dbc={dbc} />
+      <LaunchProject pools={pools} dbc={dbc} market={market} />
     </div>
   );
 }
@@ -488,12 +494,65 @@ export function LaunchDesk() {
 const LaunchProject = memo(function LaunchProject({
   pools,
   dbc,
+  market,
 }: {
   pools: MeteoraPool[];
   dbc: { ready?: boolean; program?: string | null } | null;
+  market: TokenMarket | null;
 }) {
+  const tape = [
+    {
+      label: "Lifetime volume",
+      hint: "ClawPump all-time",
+      value: market?.volumeAll != null ? formatUsd(market.volumeAll, 0) : "…",
+    },
+    {
+      label: "Txns",
+      hint: "Last 24h on the SOL pair",
+      value: market?.txns != null ? formatCompact(market.txns) : "…",
+    },
+    {
+      label: "Traders",
+      hint: "Last 24h buyers + sellers",
+      value: market?.traders != null ? formatCompact(market.traders) : "…",
+    },
+    {
+      label: "FDV",
+      hint: "Fully diluted",
+      value: market?.fdv != null ? formatUsd(market.fdv, 0) : "…",
+    },
+    {
+      label: "MC",
+      hint: "Market cap",
+      value: market?.marketCap != null ? formatUsd(market.marketCap, 0) : "…",
+    },
+    {
+      label: "Total holders",
+      hint: "Wallets holding $OPENGAP",
+      value: market?.holders != null ? formatCompact(market.holders) : "…",
+    },
+  ];
+
   return (
     <div className="flex flex-col gap-6">
+      <div>
+        <Eyebrow>Token tape</Eyebrow>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Live ${TOKEN_SYMBOL}. Volume, FDV, MC, and holders are lifetime. Txns
+          and traders are the last 24 hours until ClawPump publishes all-time
+          counts.
+        </p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          {tape.map((row) => (
+            <Panel key={row.label} className="p-4">
+              <Eyebrow>{row.label}</Eyebrow>
+              <p className="mt-2 font-mono text-2xl tracking-tight">{row.value}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{row.hint}</p>
+            </Panel>
+          ))}
+        </div>
+      </div>
+
       <div className="grid min-w-0 items-start gap-6 lg:grid-cols-2">
         <Panel>
           <Eyebrow>Revenue</Eyebrow>
